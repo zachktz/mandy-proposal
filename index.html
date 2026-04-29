@@ -946,60 +946,69 @@ section { padding: var(--sec-y) 0; position: relative; }
 /* ============================================
    AUDIT — services-style typographic rows
    ============================================ */
-.audit-list {
+/* AUDIT SUMMARY — 2x2 grid of diagnostic cards */
+.audit-summary {
     display: grid;
-    gap: 0;
-    border-top: 2px solid var(--pink);
-    border-bottom: 2px solid var(--pink);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
 }
-.audit-row {
-    display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: clamp(1.25rem, 2.25vw, 2.25rem);
-    align-items: center;
-    padding: clamp(1.5rem, 2vw, 2rem) 0.25rem;
-    border-bottom: 1px solid rgba(255, 45, 107, 0.22);
-    position: relative;
-    transition: padding-left 300ms var(--ease-snap);
-}
-.audit-content {
+.audit-summary-card {
+    padding: clamp(1.75rem, 2.5vw, 2.25rem);
+    border-radius: 22px;
+    background: var(--cream-soft);
+    border: 1.5px solid var(--ink);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    min-width: 0;
+    gap: 0.875rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 320ms var(--ease-snap), box-shadow 320ms var(--ease-snap);
 }
-.audit-row:last-child { border-bottom: 0; }
-.audit-row::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--pink-wash);
-    opacity: 0;
-    transition: opacity 420ms var(--ease-snap);
-    z-index: 0;
+.audit-summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28);
 }
-.audit-row:hover::before { opacity: 1; }
-.audit-row > * { position: relative; z-index: 1; }
-.audit-num {
+.audit-summary-card--hero {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: var(--cream);
+}
+.audit-summary-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.audit-summary-num {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-size: clamp(1.5rem, 2vw, 2rem);
     line-height: 1;
-    color: var(--pink);
     letter-spacing: -0.03em;
+    color: var(--pink);
 }
-.audit-title {
+.audit-summary-card--hero .audit-summary-num { color: var(--cream); }
+.audit-summary-title {
     font-family: 'Archivo Black', sans-serif;
     font-size: clamp(1.5rem, 2.4vw, 2.125rem);
     line-height: 0.95;
     letter-spacing: -0.03em;
     text-transform: uppercase;
     color: var(--ink);
+    margin: 0;
 }
-.audit-body {
+.audit-summary-card--hero .audit-summary-title { color: var(--cream); }
+.audit-summary-body {
     font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--ink-muted);
+    line-height: 1.55;
+    color: var(--ink-soft);
 }
+.audit-summary-card--hero .audit-summary-body { color: rgba(244, 238, 221, 0.94); }
+.audit-summary-body.bullet-list li::before { background: var(--pink); opacity: 1; }
+.audit-summary-card--hero .audit-summary-body.bullet-list li::before { background: var(--cream); }
+/* On the pink hero card, swap the High Potential pill to ink for contrast */
+.audit-summary-card--hero .audit-status[data-state="high"] { background: var(--ink); color: var(--cream); }
+.audit-summary-card--hero .audit-status[data-state="high"] .stat-dot { background: var(--cream); }
 .bullet-list {
     list-style: none;
     display: flex;
@@ -1779,7 +1788,7 @@ footer {
 @media (max-width: 880px) {
     .goals-grid, .pillars-grid, .inspo-grid, .process-grid, .packages-grid { grid-template-columns: 1fr; }
     .inspo-grid:has(.inspo:nth-child(2):last-child) { grid-template-columns: 1fr; max-width: 520px; }
-    .audit-row { grid-template-columns: 56px 1fr auto; gap: 1rem; }
+    .audit-summary { grid-template-columns: 1fr; }
     .bench-row { grid-template-columns: 110px 1fr; gap: 1rem; }
     .next-grid { grid-template-columns: 1fr; }
     .next-sticker { width: 160px; height: 160px; margin-top: 1rem; }
@@ -1798,10 +1807,8 @@ footer {
     .hero-title { font-size: clamp(2.25rem, 11vw, 4rem); }
     .hero-sticker { display: none !important; }
 
-    .audit-row { grid-template-columns: 48px 1fr; gap: 0.875rem; padding: 1.125rem 0.25rem; }
-    .audit-row .audit-status { grid-column: 1 / -1; justify-self: start; margin-top: 0.5rem; }
-    .audit-num { font-size: 1.5rem; }
-    .audit-title { font-size: clamp(1.375rem, 7vw, 1.75rem); }
+    .audit-summary-num { font-size: 1.5rem; }
+    .audit-summary-title { font-size: clamp(1.375rem, 7vw, 1.75rem); }
 
     .pack { padding: 1.75rem 1.5rem 1.75rem; min-height: auto; }
     .pack.featured { transform: none; }
@@ -2199,58 +2206,59 @@ footer {
             <p class="hist-foot"><strong>The pattern:</strong> the two breakouts had real people in frame — group photo with supporters and a community event with bold on-screen text. The rest? Mostly handheld selfies and static graphics. People-with-people content + on-screen hook = breakout.</p>
         </div>
 
-        <div class="audit-list reveal">
-            <div class="audit-row">
-                <div class="audit-num">01</div>
-                <div class="audit-content">
-                    <h3 class="audit-title">Profile &amp; Bio</h3>
-                    <ul class="audit-body bullet-list">
-                        <li>Bio truncates at "Working to bring the…" — wasted line</li>
-                        <li>No Vote June 2 CTA, no sharp hook</li>
-                        <li>Zero story highlights saved</li>
-                        <li>Strongest line ("not a career politician — your neighbor at City Hall") isn't in the bio</li>
-                    </ul>
-                </div>
-                <span class="audit-status" data-state="needs"><span class="stat-dot"></span> Needs Work</span>
-            </div>
-            <div class="audit-row">
-                <div class="audit-num">02</div>
-                <div class="audit-content">
-                    <h3 class="audit-title">Posting Consistency</h3>
-                    <ul class="audit-body bullet-list">
-                        <li>4–7 posts per week with 35 days out</li>
-                        <li>Most candidates at 494 followers post once a month</li>
-                        <li>Discipline is there. Format is the gap.</li>
-                    </ul>
-                </div>
-                <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
-            </div>
-            <div class="audit-row">
-                <div class="audit-num">03</div>
-                <div class="audit-content">
-                    <h3 class="audit-title">Voice &amp; Engagement</h3>
-                    <ul class="audit-body bullet-list">
-                        <li>5.3% ER · ~26 humans per post</li>
-                        <li>Captions are sincere, well-written, tag community partners</li>
-                        <li>Voice works. Audience is too small.</li>
-                        <li>Zero hashtags = zero local discovery</li>
-                    </ul>
-                </div>
-                <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
-            </div>
-            <div class="audit-row">
-                <div class="audit-num">04</div>
-                <div class="audit-content">
-                    <h3 class="audit-title">Growth Opportunity</h3>
-                    <ul class="audit-body bullet-list">
-                        <li>Last 10 posts: zero Reels — all static images and carousels</li>
-                        <li>Bailey averages 1,300+ likes per Reel — same template, every video</li>
-                        <li>Fix isn't more content — it's format</li>
-                        <li>Topic-label Reels + origin-story cluster + bio rebuild = share-of-voice by June 2</li>
-                    </ul>
-                </div>
-                <span class="audit-status" data-state="high"><span class="stat-dot"></span> High Potential</span>
-            </div>
+        <!-- AUDIT SUMMARY — 4 diagnostic cards -->
+        <div class="audit-summary">
+            <article class="audit-summary-card reveal reveal-delay-1">
+                <header class="audit-summary-head">
+                    <span class="audit-summary-num">01</span>
+                    <span class="audit-status" data-state="needs"><span class="stat-dot"></span> Needs Work</span>
+                </header>
+                <h3 class="audit-summary-title">Profile &amp; Bio</h3>
+                <ul class="audit-summary-body bullet-list">
+                    <li>Bio truncates at "Working to bring the…" — wasted line</li>
+                    <li>No Vote June 2 CTA, no sharp hook</li>
+                    <li>Zero story highlights saved</li>
+                    <li>Strongest line ("not a career politician — your neighbor at City Hall") isn't in the bio</li>
+                </ul>
+            </article>
+            <article class="audit-summary-card reveal reveal-delay-2">
+                <header class="audit-summary-head">
+                    <span class="audit-summary-num">02</span>
+                    <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
+                </header>
+                <h3 class="audit-summary-title">Posting Consistency</h3>
+                <ul class="audit-summary-body bullet-list">
+                    <li>4–7 posts per week with 35 days out</li>
+                    <li>Most candidates at 494 followers post once a month</li>
+                    <li>Discipline is there. Format is the gap.</li>
+                </ul>
+            </article>
+            <article class="audit-summary-card reveal reveal-delay-3">
+                <header class="audit-summary-head">
+                    <span class="audit-summary-num">03</span>
+                    <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
+                </header>
+                <h3 class="audit-summary-title">Voice &amp; Engagement</h3>
+                <ul class="audit-summary-body bullet-list">
+                    <li>5.3% ER · ~26 humans per post</li>
+                    <li>Captions are sincere, well-written, tag community partners</li>
+                    <li>Voice works. Audience is too small.</li>
+                    <li>Zero hashtags = zero local discovery</li>
+                </ul>
+            </article>
+            <article class="audit-summary-card audit-summary-card--hero reveal reveal-delay-4">
+                <header class="audit-summary-head">
+                    <span class="audit-summary-num">04</span>
+                    <span class="audit-status" data-state="high"><span class="stat-dot"></span> High Potential</span>
+                </header>
+                <h3 class="audit-summary-title">Growth Opportunity</h3>
+                <ul class="audit-summary-body bullet-list">
+                    <li>Last 10 posts: zero Reels — all static images and carousels</li>
+                    <li>Bailey averages 1,300+ likes per Reel — same template, every video</li>
+                    <li>Fix isn't more content — it's format</li>
+                    <li>Topic-label Reels + origin-story cluster + bio rebuild = share-of-voice by June 2</li>
+                </ul>
+            </article>
         </div>
     </div>
 </section>
