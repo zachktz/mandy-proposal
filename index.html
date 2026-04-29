@@ -955,6 +955,206 @@ section { padding: var(--sec-y) 0; position: relative; }
 #goals .sec-head-right { padding-top: calc(0.875rem + 1.25rem); }
 @media (max-width: 1100px) { .sec-head-logo { max-width: 200px; margin-top: 0.25rem; } }
 
+/* CONTENT CALENDAR — May 2026 */
+.cal-legend { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem); }
+.cal-legend-item { display: inline-flex; align-items: center; gap: 0.625rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); letter-spacing: 0.01em; }
+.cal-chip { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+.cal-chip--policy { background: var(--blue); }
+.cal-chip--story { background: var(--red); }
+.cal-chip--receipts { background: var(--ink); }
+
+.cal-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 2.5vw, 2rem); }
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 6px;
+}
+.cal-daylabel {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    padding: 0.625rem 0 0.625rem 0.5rem;
+    text-align: left;
+    opacity: 0.85;
+}
+.cal-day {
+    background: var(--cream-soft);
+    border: 0;
+    padding: 0.75rem;
+    min-height: clamp(74px, 9vw, 110px);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    position: relative;
+    border-radius: 6px;
+    cursor: default;
+    color: inherit;
+    font: inherit;
+    transition: transform 220ms var(--ease-snap), box-shadow 220ms var(--ease-snap);
+}
+.cal-date {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.375rem;
+}
+.cal-topic {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(0.78rem, 0.95vw, 0.92rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-top: auto;
+}
+.cal-pillar {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 0.45rem;
+    opacity: 0.7;
+}
+.cal-day--blank { background: transparent; min-height: 0; padding: 0; }
+.cal-day--off { color: var(--ink-faint); }
+.cal-day--off .cal-date { color: var(--ink-faint); opacity: 0.55; }
+.cal-day--primary { background: var(--cream-warm); border: 1.5px dashed var(--ink); }
+.cal-day--primary .cal-date { color: var(--ink); opacity: 1; }
+.cal-primary-tag {
+    margin-top: auto;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.66rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+button.cal-day { cursor: pointer; }
+button.cal-day:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(10, 10, 14, 0.35); }
+button.cal-day:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.cal-day--policy { background: var(--blue); color: var(--cream); }
+.cal-day--story { background: var(--red); color: var(--cream); }
+.cal-day--receipts { background: var(--ink); color: var(--cream); }
+.cal-day.is-active {
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px currentColor, 0 14px 28px -10px rgba(10, 10, 14, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Detail panel */
+.cal-detail {
+    background: var(--cream-soft);
+    border: 1.5px solid var(--ink);
+    border-radius: 22px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    min-height: 220px;
+}
+.cal-detail-empty { display: flex; flex-direction: column; gap: 0.625rem; max-width: 38ch; }
+.cal-detail-empty-eyebrow {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+.cal-detail-empty-body {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+.cal-detail-loaded { display: flex; flex-direction: column; gap: 1.25rem; }
+.cal-detail-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+.cal-detail-tier {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    padding: 0.45rem 0.875rem;
+    border-radius: 999px;
+    background: var(--ink);
+}
+.cal-detail-tier--policy { background: var(--blue); }
+.cal-detail-tier--story { background: var(--red); }
+.cal-detail-tier--receipts { background: var(--ink); }
+.cal-detail-meta {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+.cal-detail-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0;
+}
+.cal-detail-section { display: flex; flex-direction: column; gap: 0.45rem; }
+.cal-detail-eyebrow {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+.cal-detail-hook {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.125rem, 1.6vw, 1.35rem);
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+}
+.cal-detail-beats { display: flex; flex-direction: column; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
+.cal-detail-beats li { display: flex; gap: 0.625rem; align-items: flex-start; font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; line-height: 1.5; color: var(--ink-soft); }
+.cal-detail-beats li::before { content: ''; width: 5px; height: 5px; margin-top: 0.55em; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.cal-detail-meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-family: 'Instrument Sans', sans-serif;
+}
+.cal-detail-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.cal-detail-meta-item .label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.cal-detail-meta-item .value { font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; letter-spacing: -0.01em; color: var(--ink); }
+
+@media (max-width: 720px) {
+    .cal-grid { gap: 4px; padding: 4px; }
+    .cal-daylabel { font-size: 0.6rem; padding: 0.4rem 0 0.4rem 0.25rem; letter-spacing: 0.08em; }
+    .cal-day { padding: 0.45rem; min-height: 58px; }
+    .cal-date { font-size: 0.78rem; margin-bottom: 0.2rem; }
+    .cal-topic { font-size: 0.62rem; line-height: 1.05; }
+    .cal-pillar { display: none; }
+    .cal-primary-tag { font-size: 0.55rem; }
+}
+@media (max-width: 480px) {
+    .cal-day { padding: 0.35rem; min-height: 50px; }
+    .cal-topic { font-size: 0.55rem; }
+}
+
 /* AUDIT SUMMARY — block header */
 .summary-block-head { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
 .summary-block-eyebrow { font-family: 'Instrument Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem; }
@@ -1933,6 +2133,7 @@ footer {
         <ul class="nav-links">
             <li><a href="#audit">Audit</a></li>
             <li><a href="#strategy">Strategy</a></li>
+            <li><a href="#calendar">Calendar</a></li>
             <li><a href="#field">The Field</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#packages">Packages</a></li>
@@ -2368,6 +2569,163 @@ footer {
                     <li>OB Elementary garden coordinator</li>
                 </ul>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     CONTENT CALENDAR — May 2026
+     ================================ -->
+<section id="calendar">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Content Calendar · May 2026</span>
+                <h2 class="sec-title">30 days. 15 Reels. One race.</h2>
+            </div>
+            <p class="sec-sub">Every other day. Three pillars. Heaviest weight on policies — that's what wins primaries. Click any video to see the script.</p>
+        </div>
+
+        <!-- Pillar legend -->
+        <div class="cal-legend reveal">
+            <span class="cal-legend-item"><span class="cal-chip cal-chip--policy"></span>Policies (D2 Issues) · 9 videos</span>
+            <span class="cal-legend-item"><span class="cal-chip cal-chip--story"></span>Origin Story · 3 videos</span>
+            <span class="cal-legend-item"><span class="cal-chip cal-chip--receipts"></span>Track Record · 3 videos</span>
+        </div>
+
+        <!-- Calendar grid (Sun-start) -->
+        <div class="cal-wrap reveal">
+            <div class="cal-grid" role="grid" aria-label="May 2026 content calendar">
+                <div class="cal-daylabel">Sun</div>
+                <div class="cal-daylabel">Mon</div>
+                <div class="cal-daylabel">Tue</div>
+                <div class="cal-daylabel">Wed</div>
+                <div class="cal-daylabel">Thu</div>
+                <div class="cal-daylabel">Fri</div>
+                <div class="cal-daylabel">Sat</div>
+
+                <!-- Week 1: May 1 = Friday -->
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <button class="cal-day cal-day--story" data-date="2026-05-01" type="button" aria-label="May 1, video 1: Who I am">
+                    <span class="cal-date">1</span>
+                    <span class="cal-topic">Who I am</span>
+                    <span class="cal-pillar">Origin</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">2</span></div>
+
+                <!-- Week 2: May 3-9 -->
+                <button class="cal-day cal-day--policy" data-date="2026-05-03" type="button" aria-label="May 3, video 2: Liberty Station">
+                    <span class="cal-date">3</span>
+                    <span class="cal-topic">Liberty Station</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">4</span></div>
+                <button class="cal-day cal-day--receipts" data-date="2026-05-05" type="button" aria-label="May 5, video 3: Plumosa crosswalk">
+                    <span class="cal-date">5</span>
+                    <span class="cal-topic">Plumosa crosswalk</span>
+                    <span class="cal-pillar">Receipts</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">6</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-07" type="button" aria-label="May 7, video 4: Midway Rising">
+                    <span class="cal-date">7</span>
+                    <span class="cal-topic">Midway Rising</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">8</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-09" type="button" aria-label="May 9, video 5: E-bike safety">
+                    <span class="cal-date">9</span>
+                    <span class="cal-topic">E-bike safety</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+
+                <!-- Week 3: May 10-16 -->
+                <div class="cal-day cal-day--off"><span class="cal-date">10</span></div>
+                <button class="cal-day cal-day--story" data-date="2026-05-11" type="button" aria-label="May 11, video 6: Why I'm running">
+                    <span class="cal-date">11</span>
+                    <span class="cal-topic">Why I'm running</span>
+                    <span class="cal-pillar">Origin</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">12</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-13" type="button" aria-label="May 13, video 7: Mayor's budget">
+                    <span class="cal-date">13</span>
+                    <span class="cal-topic">Mayor's budget</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">14</span></div>
+                <button class="cal-day cal-day--receipts" data-date="2026-05-15" type="button" aria-label="May 15, video 8: 7 years on the PCPB">
+                    <span class="cal-date">15</span>
+                    <span class="cal-topic">7 yrs on the PCPB</span>
+                    <span class="cal-pillar">Receipts</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">16</span></div>
+
+                <!-- Week 4: May 17-23 -->
+                <button class="cal-day cal-day--policy" data-date="2026-05-17" type="button" aria-label="May 17, video 9: Public power">
+                    <span class="cal-date">17</span>
+                    <span class="cal-topic">Public power &amp; SDG&amp;E</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">18</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-19" type="button" aria-label="May 19, video 10: OB Pier">
+                    <span class="cal-date">19</span>
+                    <span class="cal-topic">OB Pier</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">20</span></div>
+                <button class="cal-day cal-day--receipts" data-date="2026-05-21" type="button" aria-label="May 21, video 11: Sunset Cliffs Natural Park Council">
+                    <span class="cal-date">21</span>
+                    <span class="cal-topic">Sunset Cliffs Council</span>
+                    <span class="cal-pillar">Receipts</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">22</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-23" type="button" aria-label="May 23, video 12: Housing &amp; ADUs">
+                    <span class="cal-date">23</span>
+                    <span class="cal-topic">Housing &amp; ADUs</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+
+                <!-- Week 5: May 24-30 -->
+                <div class="cal-day cal-day--off"><span class="cal-date">24</span></div>
+                <button class="cal-day cal-day--story" data-date="2026-05-25" type="button" aria-label="May 25, video 13: My family">
+                    <span class="cal-date">25</span>
+                    <span class="cal-topic">My family</span>
+                    <span class="cal-pillar">Origin</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">26</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-27" type="button" aria-label="May 27, video 14: Traffic safety">
+                    <span class="cal-date">27</span>
+                    <span class="cal-topic">Traffic safety</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">28</span></div>
+                <button class="cal-day cal-day--policy" data-date="2026-05-29" type="button" aria-label="May 29, video 15: Closing argument">
+                    <span class="cal-date">29</span>
+                    <span class="cal-topic">Closing argument</span>
+                    <span class="cal-pillar">Policy</span>
+                </button>
+                <div class="cal-day cal-day--off"><span class="cal-date">30</span></div>
+
+                <!-- Week 6: May 31 + primary marker -->
+                <div class="cal-day cal-day--off cal-day--primary"><span class="cal-date">31</span><span class="cal-primary-tag">Primary in 2 days</span></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+                <div class="cal-day cal-day--blank" aria-hidden="true"></div>
+            </div>
+
+            <!-- Detail panel — populated by JS on click -->
+            <aside class="cal-detail" id="cal-detail" aria-live="polite">
+                <div class="cal-detail-empty">
+                    <span class="cal-detail-empty-eyebrow">↑ Click any colored day above</span>
+                    <p class="cal-detail-empty-body">Each video opens to its full script — hook, beats, location, and CTA.</p>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
@@ -3022,6 +3380,247 @@ document.querySelectorAll('.field-card-btn').forEach(btn => {
             back.removeAttribute('hidden');
             card.classList.add('is-open');
             expand.textContent = 'Close ↑';
+        }
+    });
+});
+
+// CONTENT CALENDAR — script data + click handler
+const calendarScripts = {
+    '2026-05-01': {
+        videoNum: 1, dateLabel: 'Fri, May 1',
+        pillar: 'story', pillarLabel: 'Origin Story',
+        title: 'Who I am.',
+        hook: '"I\'m a mom. I\'m a wife to a disabled combat vet. I\'m not a politician. I\'m your neighbor."',
+        beats: [
+            'Open to-camera, OB Pier as backdrop',
+            'Lead with the line that\'s NOT in your bio yet',
+            'Set the 30-day promise: "Every other day, I\'m showing you who I am and what I\'ll do."',
+            'Close with the date — June 2.'
+        ],
+        location: 'OB Pier · sunrise', length: '45–60s'
+    },
+    '2026-05-03': {
+        videoNum: 2, dateLabel: 'Sun, May 3',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Liberty Station — they want to take it.',
+        hook: '"Bailey wants to privatize Liberty Station. Here\'s why that\'s a problem for every D2 family."',
+        beats: [
+            'Walk-and-talk, Liberty Station courtyard',
+            'Frame the Bailey position in his own words',
+            'What public ownership actually buys D2 (rec, public access, events)',
+            'Your stance: "I\'ll fight to keep it public — full stop."'
+        ],
+        location: 'Liberty Station courtyard', length: '45–60s'
+    },
+    '2026-05-05': {
+        videoNum: 3, dateLabel: 'Tue, May 5',
+        pillar: 'receipts', pillarLabel: 'Track Record',
+        title: 'I got this crosswalk built.',
+        hook: '"See this crosswalk? Two years ago, it didn\'t exist. I made it happen."',
+        beats: [
+            'Stand on the Plumosa & Chatsworth crosswalk',
+            'Tell the 30-second version of how you got it built',
+            'Connect to pattern: "When I see something dangerous, I don\'t wait."',
+            'CTA: "Imagine what we do at City Hall."'
+        ],
+        location: 'Plumosa & Chatsworth crosswalk', length: '30–45s'
+    },
+    '2026-05-07': {
+        videoNum: 4, dateLabel: 'Thu, May 7',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Midway Rising. The courts agreed with us.',
+        hook: '"I went to court to stop Midway. The California Supreme Court agreed with me."',
+        beats: [
+            'B-roll Midway / aerial shot',
+            'Quick recap of the height-limit fight',
+            'What it tells you about how you\'ll govern',
+            'Connect to broader story: "I read the policy. I show up."'
+        ],
+        location: 'Midway · b-roll', length: '45s'
+    },
+    '2026-05-09': {
+        videoNum: 5, dateLabel: 'Sat, May 9',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'E-bikes are killing kids. The City keeps ignoring it.',
+        hook: '"I wrote an op-ed about e-bike safety. The City ignored it. Then a kid got hit."',
+        beats: [
+            'Walk along Sunset Cliffs Blvd',
+            'Cite the op-ed with date',
+            'Specific D2 incidents — be careful with names',
+            'Your fix: signage, education, infrastructure (3 specifics)'
+        ],
+        location: 'Sunset Cliffs Blvd', length: '60s'
+    },
+    '2026-05-11': {
+        videoNum: 6, dateLabel: 'Mon, May 11',
+        pillar: 'story', pillarLabel: 'Origin Story',
+        title: 'Why I\'m running.',
+        hook: '"I never wanted to run for office. Here\'s what changed my mind."',
+        beats: [
+            'To-camera, kitchen / home setting',
+            'The specific moment that flipped you',
+            'Connect to your kids / your neighbors',
+            'Land on: "Someone who shows up should be at the table."'
+        ],
+        location: 'Home · kitchen', length: '60–75s'
+    },
+    '2026-05-13': {
+        videoNum: 7, dateLabel: 'Wed, May 13',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Cut middle management. Don\'t cut the arts.',
+        hook: '"The Mayor wants to cut arts funding. Here\'s where the money should come from instead."',
+        beats: [
+            'B-roll City Hall + a D2 arts venue',
+            'Specific number on middle management spend',
+            'Specific arts programs at risk in D2',
+            'Your line: "We don\'t balance budgets on the back of culture."'
+        ],
+        location: 'City Hall + OB / Liberty Station', length: '60s'
+    },
+    '2026-05-15': {
+        videoNum: 8, dateLabel: 'Fri, May 15',
+        pillar: 'receipts', pillarLabel: 'Track Record',
+        title: '7 years on the planning board.',
+        hook: '"I\'ve been at the table for 7 years. Most candidates have never sat at it."',
+        beats: [
+            'Pull a real meeting clip or photo',
+            'Name 3 fights you led on the PCPB',
+            'Why that experience is non-negotiable',
+            'Compare without naming: "Some are auditioning. I\'ve been working."'
+        ],
+        location: 'Peninsula Community Planning Board', length: '45s'
+    },
+    '2026-05-17': {
+        videoNum: 9, dateLabel: 'Sun, May 17',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Public power. Renegotiate SDG&E.',
+        hook: '"Your SDG&E bill went up again. Here\'s what we should do about it."',
+        beats: [
+            'Static shot at home with mail / bill',
+            'Frame the franchise-renegotiation moment',
+            'Public power option in plain English',
+            'Specific savings number / rate comparison'
+        ],
+        location: 'Home', length: '60s'
+    },
+    '2026-05-19': {
+        videoNum: 10, dateLabel: 'Tue, May 19',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'OB Pier. The plan is bad. Here\'s a better one.',
+        hook: '"The City is about to spend a lot on the OB Pier. Here\'s what they\'re missing."',
+        beats: [
+            'Walk-and-talk on the Pier',
+            'What the current plan gets wrong',
+            'Your 3-point plan',
+            'Local voices — quote a fisherman / OB business'
+        ],
+        location: 'OB Pier', length: '60s'
+    },
+    '2026-05-21': {
+        videoNum: 11, dateLabel: 'Thu, May 21',
+        pillar: 'receipts', pillarLabel: 'Track Record',
+        title: 'Sunset Cliffs is still here because we fought.',
+        hook: '"Sunset Cliffs almost got over-developed. We stopped it. Here\'s how."',
+        beats: [
+            'Sunset Cliffs at golden hour',
+            'The story of the Natural Park Council fight',
+            'What\'s next: maintenance, access, parking',
+            'Tie back to your D2 receipts pattern'
+        ],
+        location: 'Sunset Cliffs · golden hour', length: '45–60s'
+    },
+    '2026-05-23': {
+        videoNum: 12, dateLabel: 'Sat, May 23',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'ADUs. Housing without skyscrapers.',
+        hook: '"You can have housing AND keep your neighborhood. Here\'s how."',
+        beats: [
+            'Walk through OB / Loma Portal residential',
+            'Frame the false binary (skyscrapers vs nothing)',
+            'ADU policy — specifics, permitting, timeline',
+            'Address neighbor concerns directly'
+        ],
+        location: 'OB / Loma Portal residential', length: '60–75s'
+    },
+    '2026-05-25': {
+        videoNum: 13, dateLabel: 'Mon, May 25',
+        pillar: 'story', pillarLabel: 'Origin Story',
+        title: 'My family.',
+        hook: '"My husband served. He came home different. That\'s why I work the way I do."',
+        beats: [
+            'Family photo / casual at home',
+            'The veteran-spouse experience without exploiting it',
+            'How it shapes your priorities',
+            'Land on: "I show up because he can\'t always."'
+        ],
+        location: 'Home', length: '60–75s'
+    },
+    '2026-05-27': {
+        videoNum: 14, dateLabel: 'Wed, May 27',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Traffic safety. The peninsula is dangerous.',
+        hook: '"Three crosswalks in D2. Three near-misses. We need to fix this."',
+        beats: [
+            'B-roll specific dangerous intersections',
+            'Pull the data — accident counts',
+            'Your 4-point fix',
+            'Tie to the Plumosa win — proof you can deliver'
+        ],
+        location: 'Multiple D2 intersections', length: '60s'
+    },
+    '2026-05-29': {
+        videoNum: 15, dateLabel: 'Fri, May 29',
+        pillar: 'policy', pillarLabel: 'Policies · D2 Issues',
+        title: 'Closing argument. Vote June 2.',
+        hook: '"You have 4 days. Here\'s why I\'m the right call."',
+        beats: [
+            'To-camera, OB Pier sunset',
+            'Recap the 3 biggest fights you\'ll lead',
+            'Direct contrast — your receipts vs theirs',
+            'Hard close: "Vote Mandy. June 2. Tell three friends."'
+        ],
+        location: 'OB Pier · sunset', length: '60–75s'
+    }
+};
+
+const calDetail = document.getElementById('cal-detail');
+const calButtons = document.querySelectorAll('.cal-day[data-date]');
+function renderCalDetail(date) {
+    const s = calendarScripts[date];
+    if (!s) return;
+    calDetail.innerHTML = `
+        <div class="cal-detail-loaded">
+            <div class="cal-detail-head">
+                <span class="cal-detail-tier cal-detail-tier--${s.pillar}">${s.pillarLabel}</span>
+                <span class="cal-detail-meta">Video ${s.videoNum} of 15 · ${s.dateLabel}</span>
+            </div>
+            <h3 class="cal-detail-title">${s.title}</h3>
+            <div class="cal-detail-section">
+                <span class="cal-detail-eyebrow">The Hook</span>
+                <p class="cal-detail-hook">${s.hook}</p>
+            </div>
+            <div class="cal-detail-section">
+                <span class="cal-detail-eyebrow">Beats</span>
+                <ul class="cal-detail-beats">
+                    ${s.beats.map(b => `<li>${b}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="cal-detail-meta-row">
+                <div class="cal-detail-meta-item"><span class="label">Location</span><span class="value">${s.location}</span></div>
+                <div class="cal-detail-meta-item"><span class="label">Length</span><span class="value">${s.length}</span></div>
+                <div class="cal-detail-meta-item"><span class="label">Pillar</span><span class="value">${s.pillarLabel}</span></div>
+            </div>
+        </div>`;
+}
+calButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        calButtons.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        renderCalDetail(btn.getAttribute('data-date'));
+        // smooth-scroll the detail panel into view (only if needed)
+        const r = calDetail.getBoundingClientRect();
+        if (r.top < 80 || r.bottom > window.innerHeight) {
+            calDetail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     });
 });
