@@ -946,10 +946,24 @@ section { padding: var(--sec-y) 0; position: relative; }
 /* ============================================
    AUDIT — services-style typographic rows
    ============================================ */
-/* AUDIT SUMMARY — block header */
-.summary-block-head { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
+/* AUDIT SUMMARY — block header (text + screenshot side-by-side) */
+.summary-block-head {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+}
+.summary-block-head-text { display: flex; flex-direction: column; }
 .summary-block-eyebrow { font-family: 'Instrument Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem; }
 .summary-block-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.375rem, 2.4vw, 1.875rem); line-height: 0.98; letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink); margin: 0; max-width: 38ch; }
+.summary-block-image { margin: 0; max-width: 420px; width: 100%; justify-self: end; }
+.summary-block-image img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 8px 24px -10px rgba(10, 10, 14, 0.25); }
+@media (max-width: 880px) {
+    .summary-block-head { grid-template-columns: 1fr; }
+    .summary-block-image { max-width: 480px; justify-self: start; }
+}
 
 /* AUDIT SUMMARY — 2x2 grid of diagnostic cards */
 .audit-summary {
@@ -1021,29 +1035,6 @@ section { padding: var(--sec-y) 0; position: relative; }
     color: var(--ink-soft);
 }
 .audit-summary-card--hero .audit-summary-body { color: rgba(244, 238, 221, 0.94); }
-.audit-summary-image {
-    margin: 0.25rem 0 0.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-.audit-summary-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    box-shadow: 0 6px 20px -8px rgba(10, 10, 14, 0.22);
-}
-.audit-summary-imgcaption {
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 0;
-}
 .audit-summary-body.bullet-list li::before { background: var(--blue); opacity: 1; }
 .audit-summary-card--hero .audit-summary-body.bullet-list li::before { background: var(--cream); }
 /* On the blue hero card, swap the High Potential pill to ink for contrast */
@@ -2273,8 +2264,13 @@ footer {
 
         <!-- AUDIT SUMMARY — 4 diagnostic cards -->
         <div class="summary-block-head reveal">
-            <div class="summary-block-eyebrow">Your Instagram today · 4-area read</div>
-            <h3 class="summary-block-title">What's working. What's not. What's next.</h3>
+            <div class="summary-block-head-text">
+                <div class="summary-block-eyebrow">Your Instagram today · 4-area read</div>
+                <h3 class="summary-block-title">What's working. What's not. What's next.</h3>
+            </div>
+            <figure class="summary-block-image">
+                <img src="images/audit/profile-bio.png" alt="Mandy's Instagram profile (@mandyhavliksd)" loading="lazy">
+            </figure>
         </div>
         <div class="audit-summary">
             <article class="audit-summary-card reveal reveal-delay-1">
@@ -2283,10 +2279,6 @@ footer {
                     <span class="audit-status" data-state="needs"><span class="stat-dot"></span> Needs Work</span>
                 </header>
                 <h3 class="audit-summary-title">Profile &amp; Bio</h3>
-                <figure class="audit-summary-image">
-                    <img src="images/audit/profile-bio.png" alt="Mandy's Instagram profile showing the truncated bio" loading="lazy">
-                    <figcaption class="audit-summary-imgcaption">Your bio today — truncates mid-sentence, no Vote June 2 CTA.</figcaption>
-                </figure>
                 <ul class="audit-summary-body bullet-list">
                     <li>Bio truncates at "Working to bring the…" — wasted line</li>
                     <li>No Vote June 2 CTA, no sharp hook</li>
