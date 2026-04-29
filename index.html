@@ -781,6 +781,32 @@ section { padding: var(--sec-y) 0; position: relative; }
     line-height: 1.5;
     color: var(--ink-muted);
 }
+.bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+}
+.bullet-list li {
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+    font-size: inherit;
+    line-height: 1.45;
+}
+.bullet-list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    margin-top: 0.55em;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    flex-shrink: 0;
+}
+.audit-body.bullet-list li::before { background: var(--pink); opacity: 1; }
+.goal-body.bullet-list li::before { opacity: 0.7; }
 .audit-status {
     display: inline-flex;
     align-items: center;
@@ -1692,17 +1718,33 @@ footer {
             <div class="goal-card reveal reveal-delay-1">
                 <span class="goal-num">01 · Who You Are</span>
                 <h3 class="goal-title">Neighbor at City Hall</h3>
-                <p class="goal-body">Mother. Wife to a disabled combat veteran. Community organizer for 10+ years. First Vice Chair of the Peninsula Community Planning Board and the Sunset Cliffs Natural Park Council. A real human running against career politicians — and the only candidate in the field with that distinction.</p>
+                <ul class="goal-body bullet-list">
+                    <li>Mother. Wife to a disabled combat veteran.</li>
+                    <li>10+ years organizing for District 2</li>
+                    <li>First VC, Peninsula Community Planning Board</li>
+                    <li>First VC, Sunset Cliffs Natural Park Council</li>
+                    <li>The only "neighbor" in a field of career politicians</li>
+                </ul>
             </div>
             <div class="goal-card reveal reveal-delay-2">
                 <span class="goal-num">02 · Who You're Reaching</span>
                 <h3 class="goal-title">District 2 Crossover Voters</h3>
-                <p class="goal-body">45–65 female DEM/DTS voters in Point Loma, Ocean Beach, Mission Beach, Old Town and Clairemont — politically literate, dissatisfied with party leadership, and willing to cross over for the right candidate. Smaller, sharper, more reachable than chasing follower count.</p>
+                <ul class="goal-body bullet-list">
+                    <li>45–65 female DEM/DTS voters</li>
+                    <li>Point Loma · OB · Mission Beach · Old Town · Clairemont</li>
+                    <li>Politically literate, dissatisfied with party leadership</li>
+                    <li>Already crossed over once. Will again — for the right candidate.</li>
+                </ul>
             </div>
             <div class="goal-card reveal reveal-delay-3">
                 <span class="goal-num">03 · The Outcome</span>
                 <h3 class="goal-title">Top 2 by June 2</h3>
-                <p class="goal-body">Win the primary. Finish top two. Humanize Mandy in front of District 2 in May, build name recognition fast, and beat Bailey's algorithm-friendly format with lived authenticity he can't replicate. Win the runoff in November.</p>
+                <ul class="goal-body bullet-list">
+                    <li>Top 2 in the June 2 primary</li>
+                    <li>Humanize Mandy across District 2 in May</li>
+                    <li>Beat Bailey's format with lived authenticity</li>
+                    <li>Win the runoff in November</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -1783,7 +1825,12 @@ footer {
                 <div class="audit-num">01</div>
                 <div class="audit-content">
                     <h3 class="audit-title">Profile &amp; Bio</h3>
-                    <p class="audit-body">Bio truncates at "Working to bring the…" — wasted line, no Vote-June-2 CTA, no sharp hook. Zero story highlights saved. The strongest line on your website ("not a career politician — your neighbor at City Hall") isn't in the bio yet.</p>
+                    <ul class="audit-body bullet-list">
+                        <li>Bio truncates at "Working to bring the…" — wasted line</li>
+                        <li>No Vote June 2 CTA, no sharp hook</li>
+                        <li>Zero story highlights saved</li>
+                        <li>Strongest line ("not a career politician — your neighbor at City Hall") isn't in the bio</li>
+                    </ul>
                 </div>
                 <span class="audit-status" data-state="needs"><span class="stat-dot"></span> Needs Work</span>
             </div>
@@ -1791,7 +1838,11 @@ footer {
                 <div class="audit-num">02</div>
                 <div class="audit-content">
                     <h3 class="audit-title">Posting Consistency</h3>
-                    <p class="audit-body">4–7 posts per week with the election 35 days out. Most candidates at this follower count post once a month. The discipline is already there — the format is the gap.</p>
+                    <ul class="audit-body bullet-list">
+                        <li>4–7 posts per week with 35 days out</li>
+                        <li>Most candidates at 494 followers post once a month</li>
+                        <li>Discipline is there. Format is the gap.</li>
+                    </ul>
                 </div>
                 <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
             </div>
@@ -1799,7 +1850,12 @@ footer {
                 <div class="audit-num">03</div>
                 <div class="audit-content">
                     <h3 class="audit-title">Voice &amp; Engagement</h3>
-                    <p class="audit-body">5.3% engagement rate is real — but on 494 followers that's ~26 humans per post. Captions are sincere, well-written, tag community partners. Voice works; audience is too small. No hashtags = no local discovery.</p>
+                    <ul class="audit-body bullet-list">
+                        <li>5.3% ER · ~26 humans per post</li>
+                        <li>Captions are sincere, well-written, tag community partners</li>
+                        <li>Voice works. Audience is too small.</li>
+                        <li>Zero hashtags = zero local discovery</li>
+                    </ul>
                 </div>
                 <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
             </div>
@@ -1807,7 +1863,12 @@ footer {
                 <div class="audit-num">04</div>
                 <div class="audit-content">
                     <h3 class="audit-title">Growth Opportunity</h3>
-                    <p class="audit-body">Reels avg 756 views (median 298) — barely 1.5x your follower count. Bailey averages ~26K. The fix isn't more content — it's format. Topic-label Reels + origin-story cluster + bio rebuild = measurable share-of-voice in District 2 by June 2.</p>
+                    <ul class="audit-body bullet-list">
+                        <li>Reels avg 756 views (median 298) — barely 1.5× follower count</li>
+                        <li>Bailey averages ~26K — same template, every video</li>
+                        <li>Fix isn't more content — it's format</li>
+                        <li>Topic-label Reels + origin-story cluster + bio rebuild = share-of-voice by June 2</li>
+                    </ul>
                 </div>
                 <span class="audit-status" data-state="high"><span class="stat-dot"></span> High Potential</span>
             </div>
@@ -1896,7 +1957,12 @@ footer {
                 </div>
                 <div class="inspo-body">
                     <h3 class="inspo-name">Zohran Mamdani</h3>
-                    <p class="inspo-desc">The closest playbook fit for your campaign. Hyper-local, underdog, authentic, story-first. Walks neighborhoods. Talks to actual voters. Subtitles on every video. Hook in 1.5 seconds. Posts daily through the final 30 days.</p>
+                    <ul class="inspo-desc bullet-list">
+                        <li>Hyper-local, underdog, authentic, story-first</li>
+                        <li>Walks neighborhoods, talks to actual voters</li>
+                        <li>Subtitles on every video</li>
+                        <li>Hook in 1.5 seconds, posts daily</li>
+                    </ul>
                     <span class="inspo-stat">Built 11.3M followers from ~0 in one race</span>
                 </div>
             </div>
@@ -1906,7 +1972,12 @@ footer {
                 </div>
                 <div class="inspo-body">
                     <h3 class="inspo-name">AOC</h3>
-                    <p class="inspo-desc">The authenticity benchmark. First-person stories-to-camera, vertical phone-shot, captions that read like a friend talking. Treats followers like a constituency, not an audience. Authenticity beats production every time.</p>
+                    <ul class="inspo-desc bullet-list">
+                        <li>First-person stories-to-camera</li>
+                        <li>Vertical phone-shot, no production</li>
+                        <li>Captions read like a friend, not a press release</li>
+                        <li>Treats followers like a constituency</li>
+                    </ul>
                     <span class="inspo-stat">8.5M+ followers · still posts handheld</span>
                 </div>
             </div>
@@ -1916,7 +1987,12 @@ footer {
                 </div>
                 <div class="inspo-body">
                     <h3 class="inspo-name">Richard Bailey</h3>
-                    <p class="inspo-desc">Your direct opponent. The format we'll borrow — and beat. One topic per Reel, bold sticker overlay, photogenic SD location, same outfit, same framing. His template + your lived stakes is a fight he can't win.</p>
+                    <ul class="inspo-desc bullet-list">
+                        <li>One topic per Reel, bold sticker overlay</li>
+                        <li>Photogenic SD location</li>
+                        <li>Same outfit, same framing every video</li>
+                        <li>His template + your lived stakes = he can't win</li>
+                    </ul>
                     <span class="inspo-stat">25.3K followers · ~26K avg Reel views</span>
                 </div>
             </div>
