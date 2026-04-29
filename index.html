@@ -947,13 +947,13 @@ section { padding: var(--sec-y) 0; position: relative; }
    AUDIT — services-style typographic rows
    ============================================ */
 /* Sec-head right column — wraps subtitle + optional small logo */
-.sec-head-right { display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
-.sec-head-logo { max-width: 260px; width: 100%; height: auto; display: block; opacity: 0.92; }
+.sec-head-right { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.sec-head-logo { max-width: 200px; width: 100%; height: auto; display: block; opacity: 0.92; }
 /* When the right column has the logo, align the whole sec-head to the top so the logo lines up with the title */
 #goals .sec-head { align-items: start; }
 /* Offset the right column to match the eyebrow + gap height so the logo top aligns with the title top */
 #goals .sec-head-right { padding-top: calc(0.875rem + 1.25rem); }
-@media (max-width: 1100px) { .sec-head-logo { max-width: 220px; margin-top: 0.25rem; } }
+@media (max-width: 1100px) { .sec-head-logo { max-width: 200px; margin-top: 0.25rem; } }
 
 /* AUDIT SUMMARY — block header */
 .summary-block-head { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
