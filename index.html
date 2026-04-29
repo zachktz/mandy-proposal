@@ -25,10 +25,10 @@
     --line: rgba(10, 10, 14, 0.10);
     --line-strong: rgba(10, 10, 14, 0.22);
 
-    --container: 1560px;
-    --container-narrow: 1040px;
-    --gutter: clamp(1.125rem, 3.5vw, 2.5rem);
-    --sec-y: clamp(3rem, 7vw, 7rem);
+    --container: 1760px;
+    --container-narrow: 1080px;
+    --gutter: clamp(1.125rem, 3.5vw, 3rem);
+    --sec-y: clamp(3rem, 7vw, 8.5rem);
 
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
@@ -277,7 +277,7 @@ section { padding: var(--sec-y) 0; position: relative; }
 .hero-copy { display: flex; flex-direction: column; gap: 1.5rem; }
 .hero-pill { opacity: 0; animation: fade-up 0.9s var(--ease-out) 0.2s forwards; }
 .hero-title {
-    font-size: clamp(2.5rem, 6.5vw, 6rem);
+    font-size: clamp(2.5rem, 6.5vw, 7.25rem);
     line-height: 0.92;
     opacity: 0;
     animation: fade-up 1s var(--ease-out) 0.4s forwards;
@@ -496,7 +496,7 @@ section { padding: var(--sec-y) 0; position: relative; }
 }
 .sec-title {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2rem, 5vw, 4.75rem);
     line-height: 0.92;
     letter-spacing: -0.035em;
     text-transform: uppercase;
@@ -1565,7 +1565,7 @@ section { padding: var(--sec-y) 0; position: relative; }
 .next-email:hover::after { transform: scaleX(1); transform-origin: left; }
 
 .next-sticker {
-    width: 200px; height: 200px;
+    width: clamp(180px, 14vw, 260px); height: clamp(180px, 14vw, 260px);
     flex-shrink: 0;
     position: relative;
     animation: sticker-bounce 5s ease-in-out infinite;
@@ -1778,6 +1778,7 @@ footer {
 }
 @media (max-width: 880px) {
     .goals-grid, .pillars-grid, .inspo-grid, .process-grid, .packages-grid { grid-template-columns: 1fr; }
+    .inspo-grid:has(.inspo:nth-child(2):last-child) { grid-template-columns: 1fr; max-width: 520px; }
     .audit-row { grid-template-columns: 56px 1fr auto; gap: 1rem; }
     .bench-row { grid-template-columns: 110px 1fr; gap: 1rem; }
     .next-grid { grid-template-columns: 1fr; }
@@ -1797,7 +1798,8 @@ footer {
     .hero-title { font-size: clamp(2.25rem, 11vw, 4rem); }
     .hero-sticker { display: none !important; }
 
-    .audit-row { padding: 1rem 0.25rem; }
+    .audit-row { grid-template-columns: 48px 1fr; gap: 0.875rem; padding: 1.125rem 0.25rem; }
+    .audit-row .audit-status { grid-column: 1 / -1; justify-self: start; margin-top: 0.5rem; }
     .audit-num { font-size: 1.5rem; }
     .audit-title { font-size: clamp(1.375rem, 7vw, 1.75rem); }
 
@@ -1810,6 +1812,10 @@ footer {
     .cta-btn { width: 100%; justify-content: center; }
     .next-email { text-align: center; }
     .foot { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .audit-snap { grid-template-columns: 1fr; }
+    .inspo-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1848,7 +1854,7 @@ footer {
 .field-back-body--accent { color: var(--ink); font-weight: 500; }
 .field-back-list { margin: 0; padding-left: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-soft); list-style: disc; }
 .field-back-list li::marker { color: var(--pink); }
-.field-bottom-line { background: var(--ink); color: var(--cream); border-radius: 22px; padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.75rem, 3vw, 2.75rem); max-width: 920px; margin: 0 auto; }
+.field-bottom-line { background: var(--ink); color: var(--cream); border-radius: 22px; padding: clamp(1.75rem, 3vw, 3rem) clamp(1.75rem, 3vw, 3.25rem); max-width: 1080px; margin: 0 auto; }
 .field-bottom-line-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; color: var(--cream); margin: 0 0 0.875rem; }
 .field-bottom-line-body { font-family: 'Instrument Sans', sans-serif; font-size: 1rem; line-height: 1.6; color: rgba(244, 238, 221, 0.92); margin: 0; }
 @media (max-width: 1100px) { .field-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -2122,7 +2128,7 @@ footer {
 
         <!-- POST PERFORMANCE SCATTER -->
         <div class="audit-hist reveal">
-            <div class="hist-eyebrow">Post performance · last 24</div>
+            <div class="hist-eyebrow">Post performance · your last 24 posts</div>
             <h3 class="hist-title">Two breakouts. The rest sat under 1K.</h3>
             <svg class="scatter-svg" viewBox="0 0 720 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of recent posts by reach">
                 <!-- horizontal grid lines -->
@@ -2143,7 +2149,7 @@ footer {
                 <text class="scatter-tick" x="44" y="34"  text-anchor="end">6K</text>
 
                 <!-- median tick label -->
-                <text class="scatter-tick median" x="700" y="226" text-anchor="end">Median 298</text>
+                <text class="scatter-tick median" x="700" y="226" text-anchor="end">Median</text>
 
                 <!-- bottom axis line -->
                 <line class="scatter-axis" x1="50" y1="240" x2="700" y2="240"></line>
@@ -2187,8 +2193,8 @@ footer {
                 <text class="scatter-outlier-sub" x="280" y="37">5,562 views · bold on-screen text</text>
             </svg>
             <div class="scatter-axis-bottom">
-                <span>← Reel 1 (oldest)</span>
-                <span>Reel 24 (newest) →</span>
+                <span>← Post 1 (oldest)</span>
+                <span>Post 24 (newest) →</span>
             </div>
             <p class="hist-foot"><strong>The pattern:</strong> the two breakouts had real people in frame — group photo with supporters and a community event with bold on-screen text. The rest? Mostly handheld selfies and static graphics. People-with-people content + on-screen hook = breakout.</p>
         </div>
