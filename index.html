@@ -967,24 +967,10 @@ section { padding: var(--sec-y) 0; position: relative; }
     .campaign-brand img { max-width: 320px; }
 }
 
-/* AUDIT SUMMARY — block header (text + screenshot side-by-side) */
-.summary-block-head {
-    margin-top: clamp(2rem, 4vw, 3rem);
-    margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: clamp(1.5rem, 3vw, 3rem);
-    align-items: center;
-}
-.summary-block-head-text { display: flex; flex-direction: column; }
+/* AUDIT SUMMARY — block header */
+.summary-block-head { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
 .summary-block-eyebrow { font-family: 'Instrument Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem; }
 .summary-block-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.375rem, 2.4vw, 1.875rem); line-height: 0.98; letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink); margin: 0; max-width: 38ch; }
-.summary-block-image { margin: 0; max-width: 420px; width: 100%; justify-self: end; }
-.summary-block-image img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 8px 24px -10px rgba(10, 10, 14, 0.25); }
-@media (max-width: 880px) {
-    .summary-block-head { grid-template-columns: 1fr; }
-    .summary-block-image { max-width: 480px; justify-self: start; }
-}
 
 /* AUDIT SUMMARY — 2x2 grid of diagnostic cards */
 .audit-summary {
@@ -1008,18 +994,6 @@ section { padding: var(--sec-y) 0; position: relative; }
     transform: translateY(-5px);
     box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28);
 }
-/* Status-coded top accent stripe — visual cue maps to "what's working / not / next" */
-.audit-summary-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: var(--ink);
-    z-index: 1;
-}
-.audit-summary-card:has(.audit-status[data-state="needs"])::before { background: var(--red); }
-.audit-summary-card:has(.audit-status[data-state="solid"])::before { background: #2DCC70; }
-.audit-summary-card:has(.audit-status[data-state="high"])::before { background: var(--blue-hot); }
 .audit-summary-card--hero {
     background: var(--blue);
     border-color: var(--blue);
@@ -2294,13 +2268,8 @@ footer {
 
         <!-- AUDIT SUMMARY — 4 diagnostic cards -->
         <div class="summary-block-head reveal">
-            <div class="summary-block-head-text">
-                <div class="summary-block-eyebrow">Your Instagram today · 4-area read</div>
-                <h3 class="summary-block-title">What's working. What's not. What's next.</h3>
-            </div>
-            <figure class="summary-block-image">
-                <img src="images/audit/profile-bio.png" alt="Mandy's Instagram profile (@mandyhavliksd)" loading="lazy">
-            </figure>
+            <div class="summary-block-eyebrow">Your Instagram today · 4-area read</div>
+            <h3 class="summary-block-title">What's working. What's not. What's next.</h3>
         </div>
         <div class="audit-summary">
             <article class="audit-summary-card reveal reveal-delay-1">
