@@ -1156,6 +1156,9 @@ section { padding: var(--sec-y) 0; position: relative; }
     display: flex;
     flex-direction: column;
     transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+    color: inherit;
+    text-decoration: none;
+    position: relative;
 }
 .inspo:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
 .inspo-visual {
@@ -1167,10 +1170,31 @@ section { padding: var(--sec-y) 0; position: relative; }
 .inspo-visual::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 14, 0.5) 100%);
+    background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 14, 0.55) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+.inspo-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: contrast(1.04) saturate(1.05); display: block; }
+/* External-link indicator on hover */
+.inspo::after {
+    content: '↗';
+    position: absolute;
+    top: 1rem; right: 1rem;
+    z-index: 3;
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 50%;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 280ms var(--ease-snap), transform 280ms var(--ease-snap);
     pointer-events: none;
 }
-.inspo-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.05) contrast(1.05); }
+.inspo:hover::after { opacity: 1; transform: translateY(0); }
 .inspo-handle {
     position: absolute;
     bottom: 1rem; left: 1rem;
@@ -2347,8 +2371,9 @@ footer {
             <p class="sec-sub">Three accounts, three different lessons — the closest format match (Mamdani), the authenticity benchmark (AOC), and your direct opponent (Bailey), whose template we're borrowing and running with your lived stakes.</p>
         </div>
         <div class="inspo-grid">
-            <div class="inspo reveal reveal-delay-1">
+            <a class="inspo reveal reveal-delay-1" href="https://instagram.com/zohrankmamdani" target="_blank" rel="noopener" aria-label="Open @zohrankmamdani on Instagram">
                 <div class="inspo-visual">
+                    <img src="images/inspo/mamdani.webp" alt="Zohran Mamdani" loading="lazy">
                     <span class="inspo-handle">@zohrankmamdani</span>
                 </div>
                 <div class="inspo-body">
@@ -2361,13 +2386,14 @@ footer {
                     </ul>
                     <span class="inspo-stat">Built 11.3M followers from ~0 in one race</span>
                 </div>
-            </div>
-            <div class="inspo reveal reveal-delay-2">
+            </a>
+            <a class="inspo reveal reveal-delay-2" href="https://instagram.com/aoc" target="_blank" rel="noopener" aria-label="Open @aoc on Instagram">
                 <div class="inspo-visual">
+                    <img src="images/inspo/aoc.jpg" alt="Alexandria Ocasio-Cortez" loading="lazy">
                     <span class="inspo-handle">@aoc</span>
                 </div>
                 <div class="inspo-body">
-                    <h3 class="inspo-name">AOC</h3>
+                    <h3 class="inspo-name">Alexandria Ocasio-Cortez</h3>
                     <ul class="inspo-desc bullet-list">
                         <li>First-person stories-to-camera</li>
                         <li>Vertical phone-shot, no production</li>
@@ -2376,9 +2402,10 @@ footer {
                     </ul>
                     <span class="inspo-stat">8.5M+ followers · still posts handheld</span>
                 </div>
-            </div>
-            <div class="inspo reveal reveal-delay-3">
+            </a>
+            <a class="inspo reveal reveal-delay-3" href="https://instagram.com/richardbailey__" target="_blank" rel="noopener" aria-label="Open @richardbailey__ on Instagram">
                 <div class="inspo-visual">
+                    <img src="images/inspo/bailey.jpg" alt="Richard Bailey" loading="lazy">
                     <span class="inspo-handle">@richardbailey__</span>
                 </div>
                 <div class="inspo-body">
@@ -2391,7 +2418,7 @@ footer {
                     </ul>
                     <span class="inspo-stat">25.3K followers · 1,300+ likes per Reel</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
