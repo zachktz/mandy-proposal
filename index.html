@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal · Prepared for Mandy Havlik — Your Social HQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+    --cream: #F4EEDD;
+    --cream-soft: #FCF8EC;
+    --cream-warm: #EEE5CE;
+    --ink: #0A0A0E;
+    --ink-soft: #1E1E24;
+    --ink-muted: #4F4F57;
+    --ink-faint: #8A8A92;
+    --pink: #FF2D6B;
+    --pink-hot: #FF0F4A;
+    --pink-soft: #FFD2DF;
+    --pink-wash: #FFEAF1;
+    --purple: #7C3AED;
+    --orange: #FF6B2C;
+    --line: rgba(10, 10, 14, 0.10);
+    --line-strong: rgba(10, 10, 14, 0.22);
+
+    --container: 1560px;
+    --container-narrow: 1040px;
+    --gutter: clamp(1.125rem, 3.5vw, 2.5rem);
+    --sec-y: clamp(3rem, 7vw, 7rem);
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (max-width: 720px) {
+    :root {
+        --sec-y: clamp(2.5rem, 11vw, 4.5rem);
+        --gutter: 1.125rem;
+    }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+    z-index: 2;
+}
+.container-narrow { max-width: var(--container-narrow); }
+
+section { padding: var(--sec-y) 0; position: relative; }
+
+.display {
+    font-family: 'Archivo Black', 'Archivo', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+    color: var(--ink);
+    text-transform: uppercase;
+}
+.ital {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+}
+.kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--cream-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+}
+.kicker .dot {
+    width: 6px; height: 6px;
+    background: var(--pink);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* ============================================
+   NAV
+   ============================================ */
+.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 80;
+    padding: 1.375rem 0;
+    transition: all 300ms var(--ease-out);
+}
+.nav.scrolled {
+    background: rgba(244, 238, 221, 0.82);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+}
+.nav-inner > .nav-cta { justify-self: end; }
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-transform: uppercase;
+}
+.brand-mark {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--cream);
+    display: grid;
+    place-items: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+.nav-links {
+    display: flex;
+    gap: 1.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+.nav-links a {
+    transition: color 220ms ease;
+    position: relative;
+    padding: 0.25rem 0;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%; height: 2px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 320ms var(--ease-snap);
+    border-radius: 2px;
+}
+.nav-links a:hover { color: var(--pink); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--pink);
+    color: var(--cream);
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    line-height: 1;
+    border: 1.5px solid var(--pink);
+    transition: background-color 260ms var(--ease-snap),
+                color 260ms var(--ease-snap),
+                transform 260ms var(--ease-snap),
+                box-shadow 320ms var(--ease-snap);
+    min-height: 40px;
+}
+.nav-cta:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -12px rgba(10, 10, 14, 0.45);
+}
+.nav-cta svg { width: 12px; height: 12px; transition: transform 260ms var(--ease-snap); }
+.nav-cta:hover svg { transform: translateX(3px); }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.125rem 1.75rem;
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    transition: background-color 260ms var(--ease-snap),
+                color 260ms var(--ease-snap),
+                border-color 260ms var(--ease-snap),
+                transform 260ms var(--ease-snap),
+                box-shadow 320ms var(--ease-snap);
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    line-height: 1;
+    white-space: nowrap;
+}
+.btn svg {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    transition: transform 260ms var(--ease-snap);
+}
+.btn:hover svg { transform: translateX(4px); }
+.btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+}
+.btn-primary:hover {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -14px rgba(255, 45, 107, 0.55);
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+}
+.btn-ghost:hover {
+    background: var(--ink);
+    color: var(--cream);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero { padding: calc(80px + 2rem) 0 4rem; position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; padding-top: 0.5rem; }
+.hero-pill { opacity: 0; animation: fade-up 0.9s var(--ease-out) 0.2s forwards; }
+.hero-title {
+    font-size: clamp(2.5rem, 7.5vw, 7rem);
+    line-height: 0.92;
+    opacity: 0;
+    animation: fade-up 1s var(--ease-out) 0.4s forwards;
+    max-width: 18ch;
+}
+.hero-title .accent { color: var(--pink); }
+.hero-title .row {
+    display: block;
+    overflow: hidden;
+    line-height: 0.92;
+}
+.hero-title .row--cycle {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    line-height: 0.92;
+}
+.hero-title .cycle-word {
+    position: relative;
+    display: inline-block;
+    color: var(--pink);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    animation: word-in 0.55s var(--ease-out) both;
+}
+.hero-title .row--cycle.out .cycle-word {
+    animation: word-out 0.4s var(--ease-out) both;
+}
+@keyframes word-in {
+    from { transform: translateY(100%); opacity: 0; }
+    30% { opacity: 1; }
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes word-out {
+    from { transform: translateY(0); opacity: 1; }
+    80% { opacity: 0; }
+    to { transform: translateY(-100%); opacity: 0; }
+}
+.hero-sub {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    opacity: 0;
+    animation: fade-up 1s var(--ease-out) 0.7s forwards;
+}
+.hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+    opacity: 0;
+    animation: fade-up 1s var(--ease-out) 1.1s forwards;
+    flex-wrap: wrap;
+}
+.hero-meta-left { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.hero-meta-item { display: flex; flex-direction: column; gap: 0.125rem; }
+.hero-meta-item .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+}
+.hero-meta-item .value {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.hero-sticker {
+    position: absolute;
+    top: 22%;
+    right: 3%;
+    width: 180px; height: 180px;
+    pointer-events: none;
+    z-index: 3;
+    animation: sticker-bounce 4s ease-in-out infinite;
+}
+.hero-sticker-disc {
+    width: 100%; height: 100%;
+    background: var(--pink);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 10px 32px rgba(255, 45, 107, 0.25);
+}
+.hero-sticker-ring { position: absolute; inset: 0; animation: spin-slow 16s linear infinite; }
+.hero-sticker-ring svg { width: 100%; height: 100%; }
+.hero-sticker-ring text { fill: var(--cream); font-family: 'Archivo Black', sans-serif; font-size: 14px; letter-spacing: 0.18em; }
+.hero-sticker-center {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    pointer-events: none;
+}
+.hero-sticker-center .mark {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3.5rem;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+@keyframes sticker-bounce { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+.sec-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+.sec-head-left { display: flex; flex-direction: column; gap: 1rem; }
+.sec-eyebrow {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--pink);
+    text-transform: uppercase;
+}
+.sec-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    color: var(--ink);
+    max-width: 16ch;
+}
+.sec-sub {
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    color: var(--ink-muted);
+    max-width: 52ch;
+    line-height: 1.55;
+}
+
+/* ============================================
+   GOALS — 3-col differentiator-style
+   ============================================ */
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.goal-card {
+    padding: 1.75rem 1.875rem 2rem;
+    border-radius: 20px;
+    position: relative;
+    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+}
+.goal-card:nth-child(1) { background: var(--ink); color: var(--cream); }
+.goal-card:nth-child(2) { background: var(--pink); color: var(--cream); }
+.goal-card:nth-child(3) { background: var(--cream-soft); color: var(--ink); border: 1.5px solid var(--ink); }
+.goal-card:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.goal-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+.goal-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+}
+.goal-body {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    opacity: 0.92;
+    margin-top: auto;
+}
+
+/* ============================================
+   AUDIT — services-style typographic rows
+   ============================================ */
+.audit-list {
+    display: grid;
+    gap: 0;
+    border-top: 2px solid var(--pink);
+    border-bottom: 2px solid var(--pink);
+}
+.audit-row {
+    display: grid;
+    grid-template-columns: 64px 1fr minmax(280px, 38%) auto;
+    gap: clamp(1rem, 2.25vw, 2.25rem);
+    align-items: center;
+    padding: clamp(1.125rem, 1.6vw, 1.6rem) 0.25rem;
+    border-bottom: 1px solid rgba(255, 45, 107, 0.22);
+    position: relative;
+    transition: padding-left 300ms var(--ease-snap);
+}
+.audit-row:last-child { border-bottom: 0; }
+.audit-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--pink-wash);
+    opacity: 0;
+    transition: opacity 420ms var(--ease-snap);
+    z-index: 0;
+}
+.audit-row:hover::before { opacity: 1; }
+.audit-row > * { position: relative; z-index: 1; }
+.audit-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1;
+    color: var(--pink);
+    letter-spacing: -0.03em;
+}
+.audit-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+.audit-body {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink-muted);
+}
+.audit-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.audit-status .stat-dot { width: 7px; height: 7px; border-radius: 50%; }
+.audit-status[data-state="needs"] { background: var(--ink); color: var(--cream); }
+.audit-status[data-state="needs"] .stat-dot { background: var(--pink); }
+.audit-status[data-state="solid"] { background: var(--cream-warm); color: var(--ink); border: 1px solid var(--ink); }
+.audit-status[data-state="solid"] .stat-dot { background: #2DCC70; }
+.audit-status[data-state="high"] { background: var(--pink); color: var(--cream); }
+.audit-status[data-state="high"] .stat-dot { background: var(--cream); }
+
+/* ============================================
+   PILLARS — stat-style cards w/ topic lists
+   ============================================ */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.pillar {
+    padding: 2rem 1.875rem 2rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+    min-height: 460px;
+}
+.pillar:nth-child(1) { background: var(--ink); color: var(--cream); }
+.pillar:nth-child(2) { background: var(--pink); color: var(--cream); }
+.pillar:nth-child(3) { background: var(--cream-soft); color: var(--ink); border: 1.5px solid var(--ink); }
+.pillar:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.pillar-num {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+}
+.pillar-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+.pillar-desc {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+.pillar-divider {
+    height: 1px;
+    background: currentColor;
+    opacity: 0.18;
+    margin: 0.25rem 0;
+}
+.pillar-topics-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+}
+.pillar-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.pillar-topics li {
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+.pillar-topics li::before {
+    content: '';
+    width: 5px; height: 5px;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   INSPIRATION — member-card-style
+   ============================================ */
+.inspo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.inspo {
+    border: 1.5px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--cream-soft);
+    display: flex;
+    flex-direction: column;
+    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+}
+.inspo:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.inspo-visual {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--pink) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.inspo-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 14, 0.5) 100%);
+    pointer-events: none;
+}
+.inspo-visual img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.05) contrast(1.05); }
+.inspo-handle {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    z-index: 2;
+    color: var(--cream);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+}
+.inspo-body {
+    padding: 1.5rem 1.5rem 1.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+}
+.inspo-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+.inspo-desc {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    flex: 1;
+}
+.inspo-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-top: auto;
+}
+.inspo-stat::before {
+    content: '★';
+    color: var(--pink);
+}
+
+/* ============================================
+   PROCESS — step-card 4-column
+   ============================================ */
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.75rem 1.625rem 1.875rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 320ms var(--ease-snap),
+                color 320ms var(--ease-snap),
+                transform 320ms var(--ease-snap),
+                box-shadow 320ms var(--ease-snap);
+    min-height: 240px;
+}
+.step:nth-child(1) { background: var(--cream-soft); color: var(--ink); }
+.step:nth-child(2) { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.step:nth-child(3) { background: var(--pink); color: var(--cream); border-color: var(--pink); }
+.step:nth-child(4) { background: var(--cream-warm); color: var(--ink); }
+.step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 420ms var(--ease-snap);
+}
+.step:nth-child(3)::before { background: var(--ink); }
+.step:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.3); }
+.step:hover::before { transform: scaleX(1); }
+.step-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+.step-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+}
+.step-body {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    opacity: 0.92;
+    margin-top: auto;
+}
+
+/* ============================================
+   APART — diff grid + highlight card
+   ============================================ */
+.apart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.apart-card {
+    padding: 1.75rem 1.875rem 2rem;
+    border-radius: 16px;
+    position: relative;
+    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+    overflow: hidden;
+}
+.apart-card:nth-child(1) { background: var(--ink); color: var(--cream); }
+.apart-card:nth-child(2) { background: var(--pink); color: var(--cream); }
+.apart-card:nth-child(3) { background: var(--cream-warm); color: var(--ink); }
+.apart-card:nth-child(4) { background: var(--cream-soft); color: var(--ink); border: 1.5px solid var(--ink); }
+.apart-card:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.apart-tag {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+}
+.apart-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+}
+.apart-body {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    opacity: 0.92;
+}
+
+.highlight {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 22px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.highlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 80% at 100% 0%, rgba(255, 45, 107, 0.22), transparent 60%);
+    pointer-events: none;
+}
+.highlight-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    background: rgba(244, 238, 221, 0.08);
+    border: 1px solid rgba(244, 238, 221, 0.18);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+.highlight-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--pink);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+.highlight-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.75rem, 3.4vw, 2.875rem);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    max-width: 22ch;
+    position: relative;
+    z-index: 2;
+}
+.highlight-body {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.55;
+    color: rgba(244, 238, 221, 0.86);
+    max-width: 64ch;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+}
+.highlight-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(244, 238, 221, 0.18);
+    position: relative;
+    z-index: 2;
+}
+.highlight-stat-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 0.5rem;
+}
+.highlight-stat-label {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: rgba(244, 238, 221, 0.7);
+}
+
+/* ============================================
+   PACKAGES
+   ============================================ */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+    margin-top: 2.5rem;
+}
+.pack {
+    padding: 2.25rem 2rem 2rem;
+    background: var(--cream-soft);
+    border: 1.5px solid var(--ink);
+    border-radius: 22px;
+    position: relative;
+    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    min-height: 620px;
+}
+.pack::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--pink);
+    border-radius: 20px 20px 0 0;
+}
+.pack:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -18px rgba(10, 10, 14, 0.3); }
+.pack.featured {
+    background: var(--ink);
+    color: var(--cream);
+    transform: translateY(-10px);
+    box-shadow: 0 26px 52px -16px rgba(10, 10, 14, 0.38);
+}
+.pack.featured:hover { transform: translateY(-14px); box-shadow: 0 30px 60px -18px rgba(10, 10, 14, 0.45); }
+.pack.featured::after {
+    content: '★ Your selection ★';
+    position: absolute;
+    top: -16px;
+    right: 20px;
+    padding: 0.5rem 1rem;
+    background: var(--pink);
+    color: var(--cream);
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+    transform: rotate(3deg);
+    box-shadow: 0 6px 14px -6px rgba(10, 10, 14, 0.3);
+    z-index: 2;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.pack-tier {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.625rem;
+}
+.pack-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.625rem, 2.5vw, 2.125rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.pack-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.375rem;
+}
+.pack-price .amt {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.25rem, 3.5vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+}
+.pack-price .per {
+    font-size: 0.9375rem;
+    opacity: 0.7;
+}
+.pack-vol {
+    font-size: 0.9375rem;
+    opacity: 0.85;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid currentColor;
+    border-color: rgba(10, 10, 14, 0.14);
+}
+.pack.featured .pack-vol { border-color: rgba(244, 238, 221, 0.18); }
+.pack-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex: 1;
+}
+.pack-features li {
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+}
+.pack-features li svg {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    margin-top: 0.125rem;
+    color: var(--pink);
+}
+.pack-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    line-height: 1;
+    text-align: center;
+    transition: background-color 260ms var(--ease-snap),
+                color 260ms var(--ease-snap),
+                border-color 260ms var(--ease-snap),
+                transform 260ms var(--ease-snap),
+                box-shadow 320ms var(--ease-snap);
+}
+.pack-cta svg { width: 12px; height: 12px; transition: transform 260ms var(--ease-snap); }
+.pack-cta:hover svg { transform: translateX(3px); }
+.pack-cta:hover {
+    background: var(--pink);
+    border-color: var(--pink);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -14px rgba(255, 45, 107, 0.55);
+}
+.pack.featured .pack-cta {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+}
+.pack.featured .pack-cta:hover {
+    background: var(--pink);
+    color: var(--cream);
+    border-color: var(--pink);
+}
+
+/* ============================================
+   NEXT STEPS — pink CTA editorial closer
+   ============================================ */
+.next {
+    background: var(--pink);
+    color: var(--cream);
+    padding: clamp(3rem, 6vw, 6rem) 0;
+    position: relative;
+    overflow: hidden;
+}
+.next-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: center;
+}
+.next-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+}
+.next-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    max-width: 18ch;
+}
+.next-title .ital { color: var(--cream); }
+.next-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    max-width: 920px;
+}
+.nstep {
+    background: rgba(244, 238, 221, 0.12);
+    border: 1px solid rgba(244, 238, 221, 0.22);
+    border-radius: 16px;
+    padding: 1.25rem 1.375rem 1.5rem;
+    backdrop-filter: blur(4px);
+}
+.nstep-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.875rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+    margin-bottom: 0.625rem;
+}
+.nstep-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+}
+.nstep-body {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: rgba(244, 238, 221, 0.82);
+}
+.next-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1.125rem 1.625rem 1.125rem 1.875rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    line-height: 1;
+    min-height: 56px;
+    transition: background-color 280ms var(--ease-snap),
+                color 280ms var(--ease-snap),
+                border-color 280ms var(--ease-snap),
+                transform 280ms var(--ease-snap),
+                box-shadow 320ms var(--ease-snap);
+    cursor: pointer;
+}
+.cta-btn:hover {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -14px rgba(10, 10, 14, 0.35);
+}
+.cta-btn svg {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 50%;
+    padding: 4px;
+    transition: transform 280ms var(--ease-snap),
+                background-color 280ms var(--ease-snap),
+                color 280ms var(--ease-snap);
+}
+.cta-btn:hover svg { transform: translate(3px, -3px); background: var(--ink); color: var(--cream); }
+.next-email {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9375rem;
+    color: rgba(244, 238, 221, 0.85);
+    transition: color 200ms ease;
+    position: relative;
+    padding-bottom: 2px;
+}
+.next-email::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%; height: 1px;
+    background: var(--cream);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 280ms var(--ease-snap);
+}
+.next-email:hover { color: var(--cream); }
+.next-email:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.next-sticker {
+    width: 200px; height: 200px;
+    flex-shrink: 0;
+    position: relative;
+    animation: sticker-bounce 5s ease-in-out infinite;
+}
+.next-sticker-disc {
+    width: 100%; height: 100%;
+    background: var(--ink);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 14px 36px rgba(10, 10, 14, 0.3);
+}
+.next-sticker-ring { position: absolute; inset: 0; animation: spin-slow 18s linear infinite; }
+.next-sticker-ring svg { width: 100%; height: 100%; }
+.next-sticker-ring text { fill: var(--cream); font-family: 'Archivo Black', sans-serif; font-size: 14px; letter-spacing: 0.18em; }
+.next-sticker-center {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+}
+.next-sticker-center .mark {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 3.25rem;
+    color: var(--pink);
+    line-height: 1;
+}
+
+/* ============================================
+   MARQUEE TICKER
+   ============================================ */
+.ticker {
+    overflow: hidden;
+    padding: clamp(0.875rem, 1.5vw, 1.25rem) 0;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+}
+.ticker--ink {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+}
+.ticker--cream {
+    background: var(--cream-soft);
+    color: var(--ink);
+}
+.ticker-track {
+    display: flex;
+    gap: 4rem;
+    white-space: nowrap;
+    width: max-content;
+    animation: scroll-ticker 27s linear infinite;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.ticker-track span { display: inline-block; }
+.ticker-track .star { color: var(--pink); padding: 0 0.25em; }
+.ticker--reverse .ticker-track {
+    animation-duration: 36s;
+    animation-direction: reverse;
+}
+@keyframes scroll-ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ============================================
+   CURTAIN LOADER
+   ============================================ */
+.curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--pink);
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    animation: curtain-wipe 1.1s var(--ease-out) 0.4s forwards;
+    transform-origin: bottom;
+}
+.curtain-mark {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--cream);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 1;
+    animation: curtain-mark 0.6s var(--ease-out) forwards;
+}
+.curtain-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: var(--ink);
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: curtain-bar 1s var(--ease-out) forwards;
+}
+@keyframes curtain-wipe {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(0); }
+}
+@keyframes curtain-mark {
+    0%, 60% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes curtain-bar {
+    to { transform: scaleX(1); }
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+@media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+    a, button, .btn, .pack-cta, .nav-cta, .cta-btn, .next-email, .audit-row, .goal-card, .pillar, .step, .apart-card, .pack, .inspo, input, textarea, select { cursor: none; }
+    .cursor {
+        position: fixed;
+        top: 0; left: 0;
+        width: 8px; height: 8px;
+        background: var(--pink);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        will-change: transform;
+        transition: width 220ms var(--ease-out), height 220ms var(--ease-out), background 220ms var(--ease-out);
+        margin-left: -4px;
+        margin-top: -4px;
+    }
+    .cursor-ring {
+        position: fixed;
+        top: 0; left: 0;
+        width: 36px; height: 36px;
+        border: 1.5px solid var(--ink);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9997;
+        will-change: transform, width, height, border-color;
+        transition: width 220ms var(--ease-out), height 220ms var(--ease-out), border-color 220ms var(--ease-out);
+        margin-left: -18px;
+        margin-top: -18px;
+    }
+    .cursor.is-active {
+        width: 14px; height: 14px;
+        margin-left: -7px;
+        margin-top: -7px;
+    }
+    .cursor-ring.is-active {
+        width: 64px; height: 64px;
+        border-color: var(--pink);
+        margin-left: -32px;
+        margin-top: -32px;
+    }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+    background: var(--ink);
+    color: rgba(244, 238, 221, 0.62);
+    padding: 3rem 0 2.5rem;
+}
+.foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8125rem;
+}
+.foot .brand-foot {
+    color: var(--cream);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+.foot a {
+    color: rgba(244, 238, 221, 0.82);
+    transition: color 200ms ease;
+    position: relative;
+    padding-bottom: 2px;
+}
+.foot a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%; height: 1px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 280ms var(--ease-snap);
+}
+.foot a:hover { color: var(--pink); }
+.foot a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+    .nav-links { gap: 1.25rem; }
+    .sec-head { grid-template-columns: 1fr; gap: 1.25rem; }
+    .pillars-grid, .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .audit-row { grid-template-columns: 64px 1fr 240px auto; }
+}
+@media (max-width: 880px) {
+    .goals-grid, .pillars-grid, .inspo-grid, .process-grid, .packages-grid { grid-template-columns: 1fr; }
+    .apart-grid { grid-template-columns: 1fr; }
+    .audit-row { grid-template-columns: 56px 1fr auto; }
+    .audit-body { grid-column: 1 / -1; padding-left: 56px; }
+    .next-grid { grid-template-columns: 1fr; }
+    .next-sticker { width: 160px; height: 160px; margin-top: 1rem; }
+    .highlight-stats { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 720px) {
+    body { font-size: 15.5px; line-height: 1.6; }
+    .nav { padding: 0.625rem 0; }
+    .nav-links { display: none; }
+    .nav-inner { grid-template-columns: auto 1fr; gap: 1rem; }
+
+    .hero { padding: 4rem 0 3rem; }
+    .hero-title { font-size: clamp(2.25rem, 11vw, 4rem); }
+    .hero-sticker { display: none !important; }
+
+    .audit-row { padding: 1rem 0.25rem; }
+    .audit-num { font-size: 1.5rem; }
+    .audit-title { font-size: clamp(1.375rem, 7vw, 1.75rem); }
+
+    .pack { padding: 1.75rem 1.5rem 1.75rem; min-height: auto; }
+    .pack.featured { transform: none; }
+    .pack.featured:hover { transform: translateY(-4px); }
+    .pack.featured::after { right: 50%; transform: rotate(3deg) translateX(50%); }
+
+    .next-actions { flex-direction: column; align-items: stretch; }
+    .cta-btn { width: 100%; justify-content: center; }
+    .next-email { text-align: center; }
+    .foot { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Curtain loader -->
+<div class="curtain" id="curtain">
+    <span class="curtain-mark">YSHQ</span>
+    <span class="curtain-bar"></span>
+</div>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ================================
+     NAV
+     ================================ -->
+<nav class="nav" id="nav">
+    <div class="container nav-inner">
+        <a href="#top" class="brand">
+            <span class="brand-mark">Y</span>
+            <span>Your Social HQ</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#audit">Audit</a></li>
+            <li><a href="#strategy">Strategy</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#packages">Packages</a></li>
+        </ul>
+        <a href="#next-steps" class="nav-cta">
+            Next steps
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</nav>
+
+<!-- ================================
+     HERO
+     ================================ -->
+<section class="hero" id="top">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-pill">
+                <span class="kicker"><span class="dot"></span> Prepared for Mandy Havlik · Vote June 2</span>
+            </div>
+            <h1 class="display hero-title">
+                <span class="row">Become the most</span>
+                <span class="row">
+                    <span class="row--cycle" id="cycle-word">
+                        <span class="cycle-word" id="cycle-text">trusted</span>
+                    </span>
+                </span>
+                <span class="row">name in <span class="accent">District 2</span>.</span>
+            </h1>
+            <p class="hero-sub">
+                You're running to be a neighbor at City Hall — not a career politician. We're here to make sure every voter in District 2 sees that before ballots drop. This is our 30-day plan to make you impossible to ignore.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-left">
+                    <div class="hero-meta-item">
+                        <span class="label">Prepared by</span>
+                        <span class="value">Your Social HQ</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="label">For</span>
+                        <span class="value">Mandy Havlik</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="label">Race</span>
+                        <span class="value">SD City Council · D2</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="label">Date</span>
+                        <span class="value">April 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-sticker">
+        <div class="hero-sticker-disc">
+            <div class="hero-sticker-ring">
+                <svg viewBox="0 0 180 180">
+                    <defs>
+                        <path id="hero-sticker-path" d="M 90, 90 m -66, 0 a 66,66 0 1,1 132,0 a 66,66 0 1,1 -132,0" />
+                    </defs>
+                    <text>
+                        <textPath href="#hero-sticker-path" startOffset="0">★ PROPOSAL ★ STRATEGY ★ FILM ★ POST</textPath>
+                    </text>
+                </svg>
+            </div>
+            <div class="hero-sticker-center">
+                <span class="mark">HQ</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     GOALS
+     ================================ -->
+<section id="goals">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">The Brief</span>
+                <h2 class="sec-title">Where you are. Where we're headed.</h2>
+            </div>
+            <p class="sec-sub">A quick recap of who you are, who you're trying to reach, and what success on social looks like for Mandy in the final 30 days before the June 2 primary.</p>
+        </div>
+        <div class="goals-grid">
+            <div class="goal-card reveal reveal-delay-1">
+                <span class="goal-num">01 · Who You Are</span>
+                <h3 class="goal-title">Neighbor at City Hall</h3>
+                <p class="goal-body">Mother. Wife to a disabled combat veteran. Community organizer for 10+ years. First Vice Chair of the Peninsula Community Planning Board and the Sunset Cliffs Natural Park Council. A real human running against career politicians — and the only candidate in the field with that distinction.</p>
+            </div>
+            <div class="goal-card reveal reveal-delay-2">
+                <span class="goal-num">02 · Who You're Reaching</span>
+                <h3 class="goal-title">District 2 Crossover Voters</h3>
+                <p class="goal-body">45–65 female DEM/DTS voters in Point Loma, Ocean Beach, Mission Beach, Old Town and Clairemont — politically literate, dissatisfied with party leadership, and willing to cross over for the right candidate. Smaller, sharper, more reachable than chasing follower count.</p>
+            </div>
+            <div class="goal-card reveal reveal-delay-3">
+                <span class="goal-num">03 · The Outcome</span>
+                <h3 class="goal-title">Top 2 by June 2</h3>
+                <p class="goal-body">Win the primary. Finish top two. Humanize Mandy in front of District 2 in May, build name recognition fast, and beat Bailey's algorithm-friendly format with lived authenticity he can't replicate. Win the runoff in November.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     AUDIT
+     ================================ -->
+<section id="audit">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Instagram Audit · @mandyhavliksd</span>
+                <h2 class="sec-title">Where you stand today.</h2>
+            </div>
+            <p class="sec-sub">We pulled your full IG snapshot before this call: 494 followers, 185 posts, 24 Reels analyzed, plus head-to-head benchmarking against Bailey, Mamdani and AOC. Honest read, not a sales pitch.</p>
+        </div>
+        <div class="audit-list reveal">
+            <div class="audit-row">
+                <div class="audit-num">01</div>
+                <h3 class="audit-title">Profile &amp; Bio</h3>
+                <p class="audit-body">Bio truncates at "Working to bring the…" — wasted line, no Vote-June-2 CTA, no sharp hook. Zero story highlights saved. The strongest line on your website ("not a career politician — your neighbor at City Hall") isn't in the bio yet.</p>
+                <span class="audit-status" data-state="needs"><span class="stat-dot"></span> Needs Work</span>
+            </div>
+            <div class="audit-row">
+                <div class="audit-num">02</div>
+                <h3 class="audit-title">Posting Consistency</h3>
+                <p class="audit-body">4–7 posts per week with the election 35 days out. Most candidates at this follower count post once a month. The discipline is already there — the format is the gap.</p>
+                <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
+            </div>
+            <div class="audit-row">
+                <div class="audit-num">03</div>
+                <h3 class="audit-title">Voice &amp; Engagement</h3>
+                <p class="audit-body">5.3% engagement rate is real — but on 494 followers that's ~26 humans per post. Captions are sincere, well-written, tag community partners. Voice works; audience is too small. No hashtags = no local discovery.</p>
+                <span class="audit-status" data-state="solid"><span class="stat-dot"></span> Solid Foundation</span>
+            </div>
+            <div class="audit-row">
+                <div class="audit-num">04</div>
+                <h3 class="audit-title">Growth Opportunity</h3>
+                <p class="audit-body">Reels avg 756 views (median 298) — barely 1.5x your follower count. Bailey averages ~26K. The fix isn't more content — it's format. Topic-label Reels + origin-story cluster + bio rebuild = measurable share-of-voice in District 2 by June 2.</p>
+                <span class="audit-status" data-state="high"><span class="stat-dot"></span> High Potential</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     STRATEGY / PILLARS
+     ================================ -->
+<section id="strategy">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Content Strategy</span>
+                <h2 class="sec-title">What we'd make for you.</h2>
+            </div>
+            <p class="sec-sub">Three content pillars, each one designed to do specific work — establish authority, build trust, or convert. Every script we write maps to one of these.</p>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar reveal reveal-delay-1">
+                <span class="pillar-num">Pillar 01</span>
+                <h3 class="pillar-name">Origin Story</h3>
+                <p class="pillar-desc">The most viral asset you have — and it's currently invisible on your feed. Three Reels from one story arc. Filmed in one sitting. This is the breakout cluster.</p>
+                <div class="pillar-divider"></div>
+                <span class="pillar-topics-label">Reel Examples</span>
+                <ul class="pillar-topics">
+                    <li>"I was 17 when I got married. He was 23."</li>
+                    <li>"I left at 20. The community outside the church saved me."</li>
+                    <li>"That's why I fight to ban child marriage in the U.S."</li>
+                    <li>The OB Elementary crosswalk where it all started</li>
+                    <li>"Mother. Wife to a disabled combat veteran. Not a politician."</li>
+                    <li>"I grew up on free school lunches."</li>
+                </ul>
+            </div>
+            <div class="pillar reveal reveal-delay-2">
+                <span class="pillar-num">Pillar 02</span>
+                <h3 class="pillar-name">District 2 Issues</h3>
+                <p class="pillar-desc">Bailey-style topic-label Reels — one issue per video, one location, hook in 1.5 seconds, subtitles burned in. His format. Your stakes.</p>
+                <div class="pillar-divider"></div>
+                <span class="pillar-topics-label">Reel Examples</span>
+                <ul class="pillar-topics">
+                    <li>Liberty Station / Seligman — "they want to steal our property"</li>
+                    <li>Midway Rising — the courts already agreed with us</li>
+                    <li>E-bike safety — the op-ed the City ignored</li>
+                    <li>Mayor's budget — cut middle management, not the arts</li>
+                    <li>Public power &amp; SDG&amp;E renegotiation</li>
+                    <li>OB Pier · ADUs · traffic safety</li>
+                </ul>
+            </div>
+            <div class="pillar reveal reveal-delay-3">
+                <span class="pillar-num">Pillar 03</span>
+                <h3 class="pillar-name">Track Record</h3>
+                <p class="pillar-desc">Proof you've been doing this work for a decade. Not slogans — receipts. The "I've already shown up" pillar.</p>
+                <div class="pillar-divider"></div>
+                <span class="pillar-topics-label">Reel Examples</span>
+                <ul class="pillar-topics">
+                    <li>7 years on the Peninsula Community Planning Board</li>
+                    <li>First VC, Sunset Cliffs Natural Park Council</li>
+                    <li>The Chatsworth &amp; Plumosa crosswalk — you got it built</li>
+                    <li>Canon Street Pocket Park</li>
+                    <li>$700K+ raised for kids with cancer</li>
+                    <li>OB Elementary garden coordinator</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     INSPIRATION
+     ================================ -->
+<section id="inspiration">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Inspiration</span>
+                <h2 class="sec-title">The playbooks we'd borrow from.</h2>
+            </div>
+            <p class="sec-sub">Three accounts, three different lessons — the closest format match (Mamdani), the authenticity benchmark (AOC), and the local opponent whose template we're going to beat with your lived stakes (Bailey).</p>
+        </div>
+        <div class="inspo-grid">
+            <div class="inspo reveal reveal-delay-1">
+                <div class="inspo-visual">
+                    <span class="inspo-handle">@zohrankmamdani</span>
+                </div>
+                <div class="inspo-body">
+                    <h3 class="inspo-name">Zohran Mamdani</h3>
+                    <p class="inspo-desc">The closest playbook fit for your campaign. Hyper-local, underdog, authentic, story-first. Walks neighborhoods. Talks to actual voters. Subtitles on every video. Hook in 1.5 seconds. Posts daily through the final 30 days.</p>
+                    <span class="inspo-stat">Built 11.3M followers from ~0 in one race</span>
+                </div>
+            </div>
+            <div class="inspo reveal reveal-delay-2">
+                <div class="inspo-visual">
+                    <span class="inspo-handle">@aoc</span>
+                </div>
+                <div class="inspo-body">
+                    <h3 class="inspo-name">AOC</h3>
+                    <p class="inspo-desc">The authenticity benchmark. First-person stories-to-camera, vertical phone-shot, captions that read like a friend talking. Treats followers like a constituency, not an audience. Authenticity beats production every time.</p>
+                    <span class="inspo-stat">8.5M+ followers · still posts handheld</span>
+                </div>
+            </div>
+            <div class="inspo reveal reveal-delay-3">
+                <div class="inspo-visual">
+                    <span class="inspo-handle">@richardbailey__</span>
+                </div>
+                <div class="inspo-body">
+                    <h3 class="inspo-name">Richard Bailey</h3>
+                    <p class="inspo-desc">Your direct opponent. The format we'll borrow — and beat. One topic per Reel, bold sticker overlay, photogenic SD location, same outfit, same framing. His template + your lived stakes is a fight he can't win.</p>
+                    <span class="inspo-stat">25.3K followers · ~26K avg Reel views</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     PROCESS
+     ================================ -->
+<section id="process">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Our Process</span>
+                <h2 class="sec-title">How this actually works.</h2>
+            </div>
+            <p class="sec-sub">We make this as hands-off as possible for you. You schedule film days. We do the rest.</p>
+        </div>
+        <div class="process-grid">
+            <div class="step reveal reveal-delay-1">
+                <span class="step-num">Step 01</span>
+                <h3 class="step-title">AI-Powered Research</h3>
+                <p class="step-body">We scan trending topics, competitor content, and audience behavior in your space — so every outline is backed by data, not guesswork.</p>
+            </div>
+            <div class="step reveal reveal-delay-2">
+                <span class="step-num">Step 02</span>
+                <h3 class="step-title">Outline &amp; Strategy</h3>
+                <p class="step-body">Every video starts with a purpose. Frameworks designed for attention, retention, and conversion — tailored to your voice.</p>
+            </div>
+            <div class="step reveal reveal-delay-3">
+                <span class="step-num">Step 03</span>
+                <h3 class="step-title">Film &amp; Edit</h3>
+                <p class="step-body">We come to you. Professional filming, fast-turnaround editing, and revisions until it's right.</p>
+            </div>
+            <div class="step reveal reveal-delay-4">
+                <span class="step-num">Step 04</span>
+                <h3 class="step-title">Post &amp; Grow</h3>
+                <p class="step-body">We handle scheduling, captions, hashtags, and posting — then track what's working and adjust.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     WHY US / WHAT SETS US APART
+     ================================ -->
+<section id="apart">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Why Us</span>
+                <h2 class="sec-title">What sets us apart.</h2>
+            </div>
+            <p class="sec-sub">This isn't a cookie-cutter content agency. Here's what makes working with Your Social HQ different.</p>
+        </div>
+        <div class="apart-grid">
+            <div class="apart-card reveal reveal-delay-1">
+                <span class="apart-tag">01 · Research</span>
+                <h3 class="apart-title">Proprietary Niche Analysis</h3>
+                <p class="apart-body">We built an internal system that scans what people in your niche are actually talking about — trending topics, audience pain points, and competitor gaps. Every script is informed by real data.</p>
+            </div>
+            <div class="apart-card reveal reveal-delay-2">
+                <span class="apart-tag">02 · Hooks</span>
+                <h3 class="apart-title">Hook Engineering</h3>
+                <p class="apart-body">We reverse-engineer the highest-performing hooks in your space and adapt them for your voice. The first 2 seconds decide everything — we obsess over getting them right.</p>
+            </div>
+            <div class="apart-card reveal reveal-delay-3">
+                <span class="apart-tag">03 · Strategy</span>
+                <h3 class="apart-title">Weekly Strategy Sessions</h3>
+                <p class="apart-body">Our team meets weekly with heads of social at major brands to stay ahead of platform changes and emerging formats — so your strategy is never outdated.</p>
+            </div>
+            <div class="apart-card reveal reveal-delay-4">
+                <span class="apart-tag">04 · Adaptation</span>
+                <h3 class="apart-title">Always Evolving</h3>
+                <p class="apart-body">Social media changes fast. We don't set it and forget it — we test new formats, analyze performance, and refine your strategy every month based on what's actually working.</p>
+            </div>
+        </div>
+        <div class="highlight reveal">
+            <span class="highlight-tag">Proven at Scale</span>
+            <h3 class="highlight-title">Enterprise-level experience, applied to your brand.</h3>
+            <p class="highlight-body">Our founder brings direct experience growing social accounts at Monster Energy — one of the most recognized brands in the world. That same playbook of high-performing content strategy, audience growth, and brand storytelling is now applied to your business.</p>
+            <div class="highlight-stats">
+                <div>
+                    <div class="highlight-stat-num">Monster Energy</div>
+                    <div class="highlight-stat-label">Brand social media experience</div>
+                </div>
+                <div>
+                    <div class="highlight-stat-num">Millions of Views</div>
+                    <div class="highlight-stat-label">Generated across managed accounts</div>
+                </div>
+                <div>
+                    <div class="highlight-stat-num">Enterprise Playbook</div>
+                    <div class="highlight-stat-label">Scaled down for your business</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     PACKAGES
+     ================================ -->
+<section id="packages">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">Packages</span>
+                <h2 class="sec-title">Your plan, locked in.</h2>
+            </div>
+            <p class="sec-sub">You verbally signed on for the Starter — 15 videos through the June 2 primary. Growth and Authority are below as scale-up paths if fundraising hits or you advance to the runoff.</p>
+        </div>
+        <div class="packages-grid">
+            <div class="pack featured reveal reveal-delay-1">
+                <span class="pack-tier">Tier 01 · Your Selection</span>
+                <h3 class="pack-name">Starter</h3>
+                <div class="pack-price">
+                    <span class="amt">$2,900</span>
+                    <span class="per">flat</span>
+                </div>
+                <p class="pack-vol">15 videos · May → June 2 primary</p>
+                <ul class="pack-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> On-location filming</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Scripting &amp; editing</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Posting &amp; captions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Monthly strategy call</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Performance reporting</li>
+                </ul>
+                <a href="#next-steps" class="pack-cta">
+                    Get Started
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="pack reveal reveal-delay-2">
+                <span class="pack-tier">Tier 02 · Scale-up</span>
+                <h3 class="pack-name">Growth</h3>
+                <div class="pack-price">
+                    <span class="amt">$3,595</span>
+                    <span class="per">/mo</span>
+                </div>
+                <p class="pack-vol">20 videos per month</p>
+                <ul class="pack-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> On-location filming</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Scripting &amp; editing</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Posting &amp; captions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Monthly strategy call</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Performance reporting</li>
+                </ul>
+                <a href="#next-steps" class="pack-cta">
+                    Get Started
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="pack reveal reveal-delay-3">
+                <span class="pack-tier">Tier 03 · Post-primary</span>
+                <h3 class="pack-name">Authority</h3>
+                <div class="pack-price">
+                    <span class="amt">$4,895</span>
+                    <span class="per">/mo</span>
+                </div>
+                <p class="pack-vol">30 videos per month</p>
+                <ul class="pack-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> On-location filming</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Scripting &amp; editing</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Posting &amp; captions</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Monthly strategy call</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Performance reporting</li>
+                </ul>
+                <a href="#next-steps" class="pack-cta">
+                    Get Started
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     TICKER (top)
+     ================================ -->
+<div class="ticker ticker--ink" aria-hidden="true">
+    <div class="ticker-track">
+        <span>STRATEGY</span><span class="star">★</span>
+        <span>FILM DAY</span><span class="star">★</span>
+        <span>EDIT</span><span class="star">★</span>
+        <span>POST</span><span class="star">★</span>
+        <span>GROW</span><span class="star">★</span>
+        <span>REPEAT</span><span class="star">★</span>
+        <span>STRATEGY</span><span class="star">★</span>
+        <span>FILM DAY</span><span class="star">★</span>
+        <span>EDIT</span><span class="star">★</span>
+        <span>POST</span><span class="star">★</span>
+        <span>GROW</span><span class="star">★</span>
+        <span>REPEAT</span><span class="star">★</span>
+    </div>
+</div>
+
+<!-- ================================
+     NEXT STEPS
+     ================================ -->
+<section class="next" id="next-steps">
+    <div class="container">
+        <div class="next-grid">
+            <div>
+                <div class="next-eyebrow">Next Steps · 35 days to June 2</div>
+                <h2 class="next-title">Let's <span class="ital">go</span> win this thing.</h2>
+                <div class="next-steps">
+                    <div class="nstep">
+                        <div class="nstep-num">01</div>
+                        <h3 class="nstep-title">Confirm via Zelle</h3>
+                        <p class="nstep-body">$2,900 sent to lock in the 15-video Starter package.</p>
+                    </div>
+                    <div class="nstep">
+                        <div class="nstep-num">02</div>
+                        <h3 class="nstep-title">Lock film day(s)</h3>
+                        <p class="nstep-body">Week of Apr 29. One 6-hour day or two 3-hour blocks — your call.</p>
+                    </div>
+                    <div class="nstep">
+                        <div class="nstep-num">03</div>
+                        <h3 class="nstep-title">We handle the rest</h3>
+                        <p class="nstep-body">Origin-story Reels first, then the District 2 issue cluster. You show up. We do the rest.</p>
+                    </div>
+                </div>
+                <div class="next-actions">
+                    <a href="mailto:zach@yoursocialheadquarters.com?subject=Locking%20in%20—%20Mandy%20Havlik%20campaign" class="cta-btn">
+                        Lock it in
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                    <a href="mailto:zach@yoursocialheadquarters.com" class="next-email">zach@yoursocialheadquarters.com</a>
+                </div>
+            </div>
+            <div class="next-sticker">
+                <div class="next-sticker-disc">
+                    <div class="next-sticker-ring">
+                        <svg viewBox="0 0 200 200">
+                            <defs>
+                                <path id="next-sticker-path" d="M 100, 100 m -74, 0 a 74,74 0 1,1 148,0 a 74,74 0 1,1 -148,0" />
+                            </defs>
+                            <text>
+                                <textPath href="#next-sticker-path" startOffset="0">★ LET'S BUILD ★ LET'S BUILD ★ LET'S BUILD</textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <div class="next-sticker-center">
+                        <span class="mark">go</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================
+     TICKER (bottom)
+     ================================ -->
+<div class="ticker ticker--cream ticker--reverse" aria-hidden="true">
+    <div class="ticker-track">
+        <span>BOOK</span><span class="star">★</span>
+        <span>FILM</span><span class="star">★</span>
+        <span>SCALE</span><span class="star">★</span>
+        <span>YOUR SOCIAL HQ</span><span class="star">★</span>
+        <span>BOOK</span><span class="star">★</span>
+        <span>FILM</span><span class="star">★</span>
+        <span>SCALE</span><span class="star">★</span>
+        <span>YOUR SOCIAL HQ</span><span class="star">★</span>
+        <span>BOOK</span><span class="star">★</span>
+        <span>FILM</span><span class="star">★</span>
+        <span>SCALE</span><span class="star">★</span>
+        <span>YOUR SOCIAL HQ</span><span class="star">★</span>
+    </div>
+</div>
+
+<!-- ================================
+     FOOTER
+     ================================ -->
+<footer>
+    <div class="container foot">
+        <span class="brand-foot">Your Social HQ</span>
+        <span>Prepared for Mandy Havlik · April 2026</span>
+        <span><a href="https://yoursocialheadquarters.com" target="_blank" rel="noopener">yoursocialheadquarters.com</a></span>
+    </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Hero word cycler — italicized pink word that rotates
+const cycleWords = ['trusted', 'known', 'heard', 'loved', 'picked'];
+const cycleWrap = document.getElementById('cycle-word');
+const cycleText = document.getElementById('cycle-text');
+let cycleIdx = 0;
+setInterval(() => {
+    cycleWrap.classList.add('out');
+    setTimeout(() => {
+        cycleIdx = (cycleIdx + 1) % cycleWords.length;
+        cycleText.textContent = cycleWords[cycleIdx];
+        cycleWrap.classList.remove('out');
+    }, 380);
+}, 2400);
+
+// Curtain loader: remove from DOM after animation finishes (so it doesn't block clicks if it ever lingers)
+const curtain = document.getElementById('curtain');
+if (curtain) {
+    setTimeout(() => curtain.remove(), 1700);
+}
+
+// Custom cursor (desktop only, respects motion preference)
+const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (supportsHover && !reducedMotion) {
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let rx = mx, ry = my;
+    let cx = mx, cy = my;
+    window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    function tick() {
+        cx += (mx - cx) * 0.55;
+        cy += (my - cy) * 0.55;
+        rx += (mx - rx) * 0.18;
+        ry += (my - ry) * 0.18;
+        cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+        ring.style.transform = `translate(${rx}px, ${ry}px)`;
+        requestAnimationFrame(tick);
+    }
+    tick();
+    const interactive = 'a, button, .btn, .nav-cta, .cta-btn, .pack-cta, .next-email, .audit-row, .goal-card, .pillar, .step, .apart-card, .pack, .inspo';
+    document.querySelectorAll(interactive).forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.classList.add('is-active'); ring.classList.add('is-active'); });
+        el.addEventListener('mouseleave', () => { cursor.classList.remove('is-active'); ring.classList.remove('is-active'); });
+    });
+    // Hide on mouse leaving window
+    document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; ring.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; ring.style.opacity = '1'; });
+} else {
+    // Hide cursor elements on touch / reduced motion
+    const c = document.getElementById('cursor'); if (c) c.remove();
+    const r = document.getElementById('cursor-ring'); if (r) r.remove();
+}
+</script>
+
+</body>
+</html>
