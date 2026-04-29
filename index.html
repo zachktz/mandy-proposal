@@ -267,41 +267,112 @@ section { padding: var(--sec-y) 0; position: relative; }
    HERO
    ============================================ */
 .hero { padding: calc(80px + 2rem) 0 4rem; position: relative; overflow: hidden; }
-.hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; padding-top: 0.5rem; }
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+    padding-top: 0.5rem;
+}
+.hero-copy { display: flex; flex-direction: column; gap: 1.5rem; }
 .hero-pill { opacity: 0; animation: fade-up 0.9s var(--ease-out) 0.2s forwards; }
 .hero-title {
-    font-size: clamp(2.5rem, 7.5vw, 7rem);
+    font-size: clamp(2.5rem, 6.5vw, 6rem);
     line-height: 0.92;
     opacity: 0;
     animation: fade-up 1s var(--ease-out) 0.4s forwards;
     max-width: 18ch;
 }
-.hero-title .accent { color: var(--pink); }
-.hero-title .row {
-    display: block;
+.hero-image {
+    position: relative;
+    border-radius: 24px;
     overflow: hidden;
-    line-height: 0.92;
+    aspect-ratio: 4 / 5;
+    background: var(--cream-warm);
+    box-shadow: 0 30px 60px -24px rgba(10, 10, 14, 0.35);
+    opacity: 0;
+    animation: fade-up 1.1s var(--ease-out) 0.85s forwards;
+    z-index: 2;
 }
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    filter: contrast(1.02) saturate(1.05);
+}
+.hero-image-stamp {
+    position: absolute;
+    bottom: -22px;
+    right: -22px;
+    width: 120px;
+    height: 120px;
+    z-index: 4;
+    pointer-events: none;
+    animation: sticker-bounce 4s ease-in-out infinite;
+}
+.hero-image-stamp-disc {
+    width: 100%; height: 100%;
+    background: var(--pink);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 12px 28px rgba(255, 45, 107, 0.35);
+    border: 3px solid var(--cream);
+}
+.hero-image-stamp-ring { position: absolute; inset: 0; animation: spin-slow 16s linear infinite; }
+.hero-image-stamp-ring svg { width: 100%; height: 100%; }
+.hero-image-stamp-ring text { fill: var(--cream); font-family: 'Archivo Black', sans-serif; font-size: 16px; letter-spacing: 0.18em; }
+.hero-image-stamp-center {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+}
+.hero-image-stamp-center .mark {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 2.25rem;
+    color: var(--cream);
+    line-height: 1;
+}
+.hero-title .accent { color: var(--pink); }
+.hero-title .row { display: block; line-height: 0.92; }
 .hero-title .row--cycle {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: bottom;
-    line-height: 0.92;
+    display: inline-flex;
+    align-items: baseline;
+    color: var(--cream);
+    position: relative;
+    overflow: visible;
+    height: 1em;
+    line-height: 1em;
+    padding: 0 0.15em;
+    margin-right: 0.05em;
+    vertical-align: baseline;
+}
+.hero-title .row--cycle::before {
+    content: '';
+    position: absolute;
+    inset: 0.02em 0;
+    background: var(--cycle-bg, var(--pink));
+    border-radius: 0.14em;
+    z-index: 0;
+    transition: background 380ms var(--ease-out);
 }
 .hero-title .cycle-word {
     position: relative;
+    z-index: 2;
     display: inline-block;
-    color: var(--pink);
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: -0.01em;
+    color: var(--cream);
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
     white-space: nowrap;
     animation: word-in 0.55s var(--ease-out) both;
 }
 .hero-title .row--cycle.out .cycle-word {
     animation: word-out 0.4s var(--ease-out) both;
+}
+@media (max-width: 720px) {
+    .hero-title .row--cycle { padding: 0 0.12em; }
 }
 @keyframes word-in {
     from { transform: translateY(100%); opacity: 0; }
@@ -350,7 +421,8 @@ section { padding: var(--sec-y) 0; position: relative; }
     letter-spacing: -0.01em;
 }
 
-.hero-sticker {
+.hero-sticker { display: none; }
+.hero-sticker-old {
     position: absolute;
     top: 22%;
     right: 3%;
@@ -1420,6 +1492,10 @@ footer {
     .next-grid { grid-template-columns: 1fr; }
     .next-sticker { width: 160px; height: 160px; margin-top: 1rem; }
     .highlight-stats { grid-template-columns: 1fr; gap: 1rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-image { max-width: 420px; margin: 0 auto; }
+    .hero-image-stamp { width: 96px; height: 96px; bottom: -16px; right: -16px; }
+    .hero-image-stamp-center .mark { font-size: 1.875rem; }
 }
 @media (max-width: 720px) {
     body { font-size: 15.5px; line-height: 1.6; }
@@ -1495,57 +1571,62 @@ footer {
 <section class="hero" id="top">
     <div class="container">
         <div class="hero-grid">
-            <div class="hero-pill">
-                <span class="kicker"><span class="dot"></span> Prepared for Mandy Havlik · Vote June 2</span>
-            </div>
-            <h1 class="display hero-title">
-                <span class="row">Become the most</span>
-                <span class="row">
-                    <span class="row--cycle" id="cycle-word">
-                        <span class="cycle-word" id="cycle-text">trusted</span>
+            <div class="hero-copy">
+                <div class="hero-pill">
+                    <span class="kicker"><span class="dot"></span> Prepared for Mandy Havlik · Vote June 2</span>
+                </div>
+                <h1 class="display hero-title">
+                    <span class="row">Become the most</span>
+                    <span class="row">
+                        <span class="row--cycle" id="cycle-word">
+                            <span class="cycle-word" id="cycle-text">trusted</span>
+                        </span>
                     </span>
-                </span>
-                <span class="row">name in <span class="accent">District 2</span>.</span>
-            </h1>
-            <p class="hero-sub">
-                You're running to be a neighbor at City Hall — not a career politician. We're here to make sure every voter in District 2 sees that before ballots drop. This is our 30-day plan to make you impossible to ignore.
-            </p>
-            <div class="hero-meta">
-                <div class="hero-meta-left">
-                    <div class="hero-meta-item">
-                        <span class="label">Prepared by</span>
-                        <span class="value">Your Social HQ</span>
-                    </div>
-                    <div class="hero-meta-item">
-                        <span class="label">For</span>
-                        <span class="value">Mandy Havlik</span>
-                    </div>
-                    <div class="hero-meta-item">
-                        <span class="label">Race</span>
-                        <span class="value">SD City Council · D2</span>
-                    </div>
-                    <div class="hero-meta-item">
-                        <span class="label">Date</span>
-                        <span class="value">April 2026</span>
+                    <span class="row">name in <span class="accent">District 2</span>.</span>
+                </h1>
+                <p class="hero-sub">
+                    You're running to be a neighbor at City Hall — not a career politician. We're here to make sure every voter in District 2 sees that before ballots drop. This is our 30-day plan to make you impossible to ignore.
+                </p>
+            </div>
+            <div class="hero-image">
+                <img src="images/mandy.webp" alt="Mandy Havlik" loading="eager">
+                <div class="hero-image-stamp">
+                    <div class="hero-image-stamp-disc">
+                        <div class="hero-image-stamp-ring">
+                            <svg viewBox="0 0 120 120">
+                                <defs>
+                                    <path id="hero-stamp-path" d="M 60, 60 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" />
+                                </defs>
+                                <text>
+                                    <textPath href="#hero-stamp-path" startOffset="0">★ VOTE JUNE 2 ★ VOTE JUNE 2 ★</textPath>
+                                </text>
+                            </svg>
+                        </div>
+                        <div class="hero-image-stamp-center">
+                            <span class="mark">HQ</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="hero-sticker">
-        <div class="hero-sticker-disc">
-            <div class="hero-sticker-ring">
-                <svg viewBox="0 0 180 180">
-                    <defs>
-                        <path id="hero-sticker-path" d="M 90, 90 m -66, 0 a 66,66 0 1,1 132,0 a 66,66 0 1,1 -132,0" />
-                    </defs>
-                    <text>
-                        <textPath href="#hero-sticker-path" startOffset="0">★ PROPOSAL ★ STRATEGY ★ FILM ★ POST</textPath>
-                    </text>
-                </svg>
-            </div>
-            <div class="hero-sticker-center">
-                <span class="mark">HQ</span>
+        <div class="hero-meta">
+            <div class="hero-meta-left">
+                <div class="hero-meta-item">
+                    <span class="label">Prepared by</span>
+                    <span class="value">Your Social HQ</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">For</span>
+                    <span class="value">Mandy Havlik</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Race</span>
+                    <span class="value">SD City Council · D2</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Date</span>
+                    <span class="value">April 2026</span>
+                </div>
             </div>
         </div>
     </div>
@@ -2027,19 +2108,31 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Hero word cycler — italicized pink word that rotates
-const cycleWords = ['trusted', 'known', 'heard', 'loved', 'picked'];
+// Hero word cycler — cream Archivo Black on a rotating-color pill
+const cycleWords = [
+    { text: 'trusted', bg: '#FF2D6B' }, // pink
+    { text: 'known',   bg: '#0A0A0E' }, // ink
+    { text: 'heard',   bg: '#7C3AED' }, // purple
+    { text: 'loved',   bg: '#FF6B2C' }, // orange
+    { text: 'picked',  bg: '#FF2D6B' }, // pink
+];
 const cycleWrap = document.getElementById('cycle-word');
 const cycleText = document.getElementById('cycle-text');
 let cycleIdx = 0;
-setInterval(() => {
-    cycleWrap.classList.add('out');
-    setTimeout(() => {
-        cycleIdx = (cycleIdx + 1) % cycleWords.length;
-        cycleText.textContent = cycleWords[cycleIdx];
-        cycleWrap.classList.remove('out');
-    }, 380);
-}, 2400);
+cycleWrap.style.setProperty('--cycle-bg', cycleWords[0].bg);
+setTimeout(() => {
+    function step() {
+        cycleWrap.classList.add('out');
+        setTimeout(() => {
+            cycleIdx = (cycleIdx + 1) % cycleWords.length;
+            cycleText.textContent = cycleWords[cycleIdx].text;
+            cycleWrap.style.setProperty('--cycle-bg', cycleWords[cycleIdx].bg);
+            cycleWrap.classList.remove('out');
+        }, 400);
+    }
+    step();
+    setInterval(step, 1700);
+}, 1500);
 
 // Curtain loader: remove from DOM after animation finishes (so it doesn't block clicks if it ever lingers)
 const curtain = document.getElementById('curtain');
