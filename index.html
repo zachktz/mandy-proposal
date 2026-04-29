@@ -946,6 +946,27 @@ section { padding: var(--sec-y) 0; position: relative; }
 /* ============================================
    AUDIT — services-style typographic rows
    ============================================ */
+/* CAMPAIGN BRAND STRIP — Mandy's logo between hero and goals */
+.campaign-brand {
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--cream-soft);
+}
+.campaign-brand .container {
+    display: flex;
+    justify-content: center;
+}
+.campaign-brand img {
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media (max-width: 720px) {
+    .campaign-brand img { max-width: 320px; }
+}
+
 /* AUDIT SUMMARY — block header (text + screenshot side-by-side) */
 .summary-block-head {
     margin-top: clamp(2rem, 4vw, 3rem);
@@ -2025,6 +2046,15 @@ footer {
         </div>
     </div>
 </section>
+
+<!-- ================================
+     CAMPAIGN BRAND STRIP
+     ================================ -->
+<div class="campaign-brand reveal">
+    <div class="container">
+        <img src="images/mandy-logo.png" alt="Mandy Havlik for City Council District 2" loading="lazy">
+    </div>
+</div>
 
 <!-- ================================
      GOALS
