@@ -554,6 +554,176 @@ section { padding: var(--sec-y) 0; position: relative; }
 }
 
 /* ============================================
+   AUDIT — snapshot cards + benchmark chart
+   ============================================ */
+.audit-snap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+.snap-card {
+    padding: 1.5rem 1.625rem 1.5rem;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+.snap-card:nth-child(1) { background: var(--ink); color: var(--cream); }
+.snap-card:nth-child(2) { background: var(--pink); color: var(--cream); }
+.snap-card:nth-child(3) { background: var(--cream-warm); color: var(--ink); }
+.snap-card:nth-child(4) { background: var(--cream-soft); color: var(--ink); border: 1.5px solid var(--ink); }
+.snap-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+.snap-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-top: 0.25rem;
+}
+.snap-meta {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    opacity: 0.92;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+.snap-mini {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+.snap-card:nth-child(3) .snap-mini,
+.snap-card:nth-child(4) .snap-mini { background: rgba(10, 10, 14, 0.12); }
+.snap-mini-fill {
+    height: 100%;
+    background: currentColor;
+    border-radius: 999px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.snap-card.reveal.is-visible .snap-mini-fill { transform: scaleX(var(--w, 0.5)); }
+
+.audit-bench {
+    background: var(--cream-soft);
+    border: 1.5px solid var(--ink);
+    border-radius: 22px;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    position: relative;
+    overflow: hidden;
+}
+.bench-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 0.5rem;
+}
+.bench-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+    max-width: 30ch;
+}
+.bench-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+}
+.bench-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 1.5rem;
+}
+.bench-name {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+}
+.bench-handle {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bench-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pink);
+}
+.bench-tag.muted { color: var(--ink-faint); }
+.bench-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+.bench-bar {
+    flex: 1;
+    height: 22px;
+    background: rgba(10, 10, 14, 0.06);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+}
+.bench-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+.bench-row.reveal.is-visible .bench-bar-fill { transform: scaleX(var(--w)); }
+.bench-row[data-style="ink"] .bench-bar-fill { background: var(--ink); }
+.bench-row[data-style="pink"] .bench-bar-fill { background: var(--pink); }
+.bench-row[data-style="purple"] .bench-bar-fill { background: var(--purple); }
+.bench-value {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    min-width: 78px;
+    text-align: right;
+    white-space: nowrap;
+}
+.bench-foot {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9375rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 64ch;
+}
+.bench-foot strong { color: var(--ink); font-weight: 700; }
+
+/* ============================================
    AUDIT — services-style typographic rows
    ============================================ */
 .audit-list {
@@ -840,136 +1010,6 @@ section { padding: var(--sec-y) 0; position: relative; }
     line-height: 1.5;
     opacity: 0.92;
     margin-top: auto;
-}
-
-/* ============================================
-   APART — diff grid + highlight card
-   ============================================ */
-.apart-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
-}
-.apart-card {
-    padding: 1.75rem 1.875rem 2rem;
-    border-radius: 16px;
-    position: relative;
-    transition: transform 400ms var(--ease-snap), box-shadow 400ms var(--ease-snap);
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.25rem;
-    overflow: hidden;
-}
-.apart-card:nth-child(1) { background: var(--ink); color: var(--cream); }
-.apart-card:nth-child(2) { background: var(--pink); color: var(--cream); }
-.apart-card:nth-child(3) { background: var(--cream-warm); color: var(--ink); }
-.apart-card:nth-child(4) { background: var(--cream-soft); color: var(--ink); border: 1.5px solid var(--ink); }
-.apart-card:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
-.apart-tag {
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.65;
-}
-.apart-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(1.25rem, 1.7vw, 1.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    text-transform: uppercase;
-}
-.apart-body {
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    opacity: 0.92;
-}
-
-.highlight {
-    background: var(--ink);
-    color: var(--cream);
-    border-radius: 22px;
-    padding: clamp(2rem, 4vw, 3.5rem);
-    position: relative;
-    overflow: hidden;
-}
-.highlight::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(60% 80% at 100% 0%, rgba(255, 45, 107, 0.22), transparent 60%);
-    pointer-events: none;
-}
-.highlight-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.875rem;
-    background: rgba(244, 238, 221, 0.08);
-    border: 1px solid rgba(244, 238, 221, 0.18);
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--cream);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 2;
-}
-.highlight-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--pink);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-.highlight-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(1.75rem, 3.4vw, 2.875rem);
-    line-height: 0.96;
-    letter-spacing: -0.035em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    max-width: 22ch;
-    position: relative;
-    z-index: 2;
-}
-.highlight-body {
-    font-size: clamp(1rem, 1.2vw, 1.125rem);
-    line-height: 1.55;
-    color: rgba(244, 238, 221, 0.86);
-    max-width: 64ch;
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 2;
-}
-.highlight-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid rgba(244, 238, 221, 0.18);
-    position: relative;
-    z-index: 2;
-}
-.highlight-stat-num {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(1.375rem, 2vw, 1.75rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    text-transform: uppercase;
-    color: var(--pink);
-    margin-bottom: 0.5rem;
-}
-.highlight-stat-label {
-    font-size: 0.875rem;
-    line-height: 1.4;
-    color: rgba(244, 238, 221, 0.7);
 }
 
 /* ============================================
@@ -1851,62 +1891,6 @@ footer {
 </section>
 
 <!-- ================================
-     WHY US / WHAT SETS US APART
-     ================================ -->
-<section id="apart">
-    <div class="container">
-        <div class="sec-head reveal">
-            <div class="sec-head-left">
-                <span class="sec-eyebrow">Why Us</span>
-                <h2 class="sec-title">What sets us apart.</h2>
-            </div>
-            <p class="sec-sub">This isn't a cookie-cutter content agency. Here's what makes working with Your Social HQ different.</p>
-        </div>
-        <div class="apart-grid">
-            <div class="apart-card reveal reveal-delay-1">
-                <span class="apart-tag">01 · Research</span>
-                <h3 class="apart-title">Proprietary Niche Analysis</h3>
-                <p class="apart-body">We built an internal system that scans what people in your niche are actually talking about — trending topics, audience pain points, and competitor gaps. Every script is informed by real data.</p>
-            </div>
-            <div class="apart-card reveal reveal-delay-2">
-                <span class="apart-tag">02 · Hooks</span>
-                <h3 class="apart-title">Hook Engineering</h3>
-                <p class="apart-body">We reverse-engineer the highest-performing hooks in your space and adapt them for your voice. The first 2 seconds decide everything — we obsess over getting them right.</p>
-            </div>
-            <div class="apart-card reveal reveal-delay-3">
-                <span class="apart-tag">03 · Strategy</span>
-                <h3 class="apart-title">Weekly Strategy Sessions</h3>
-                <p class="apart-body">Our team meets weekly with heads of social at major brands to stay ahead of platform changes and emerging formats — so your strategy is never outdated.</p>
-            </div>
-            <div class="apart-card reveal reveal-delay-4">
-                <span class="apart-tag">04 · Adaptation</span>
-                <h3 class="apart-title">Always Evolving</h3>
-                <p class="apart-body">Social media changes fast. We don't set it and forget it — we test new formats, analyze performance, and refine your strategy every month based on what's actually working.</p>
-            </div>
-        </div>
-        <div class="highlight reveal">
-            <span class="highlight-tag">Proven at Scale</span>
-            <h3 class="highlight-title">Enterprise-level experience, applied to your brand.</h3>
-            <p class="highlight-body">Our founder brings direct experience growing social accounts at Monster Energy — one of the most recognized brands in the world. That same playbook of high-performing content strategy, audience growth, and brand storytelling is now applied to your business.</p>
-            <div class="highlight-stats">
-                <div>
-                    <div class="highlight-stat-num">Monster Energy</div>
-                    <div class="highlight-stat-label">Brand social media experience</div>
-                </div>
-                <div>
-                    <div class="highlight-stat-num">Millions of Views</div>
-                    <div class="highlight-stat-label">Generated across managed accounts</div>
-                </div>
-                <div>
-                    <div class="highlight-stat-num">Enterprise Playbook</div>
-                    <div class="highlight-stat-label">Scaled down for your business</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================
      PACKAGES
      ================================ -->
 <section id="packages">
@@ -1923,8 +1907,8 @@ footer {
                 <span class="pack-tier">Tier 01 · Your Selection</span>
                 <h3 class="pack-name">Starter</h3>
                 <div class="pack-price">
-                    <span class="amt">$2,900</span>
-                    <span class="per">flat</span>
+                    <span class="amt">$2,995</span>
+                    <span class="per">/mo</span>
                 </div>
                 <p class="pack-vol">15 videos · May → June 2 primary</p>
                 <ul class="pack-features">
@@ -2016,7 +2000,7 @@ footer {
                     <div class="nstep">
                         <div class="nstep-num">01</div>
                         <h3 class="nstep-title">Confirm via Zelle</h3>
-                        <p class="nstep-body">$2,900 sent to lock in the 15-video Starter package.</p>
+                        <p class="nstep-body">$2,995 sent to lock in the 15-video Starter package.</p>
                     </div>
                     <div class="nstep">
                         <div class="nstep-num">02</div>
