@@ -1133,6 +1133,7 @@ section { padding: var(--sec-y) 0; position: relative; }
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
 }
+.inspo-grid:has(.inspo:nth-child(2):last-child) { grid-template-columns: repeat(2, 1fr); max-width: 880px; }
 .inspo {
     border: 1.5px solid var(--ink);
     border-radius: 20px;
@@ -1818,6 +1819,40 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* THE FIELD — opposition cards */
+.field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: clamp(2rem, 4vw, 3rem); align-items: start; }
+.field-card { background: var(--cream-soft); border: 1.5px solid var(--ink); border-radius: 20px; overflow: hidden; transition: transform 320ms var(--ease-snap), box-shadow 320ms var(--ease-snap); display: flex; flex-direction: column; }
+.field-card:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.field-card.is-open { transform: translateY(-5px); box-shadow: 0 22px 44px -18px rgba(10, 10, 14, 0.28); }
+.field-card-btn { appearance: none; background: transparent; border: 0; width: 100%; text-align: left; padding: 0; font: inherit; color: inherit; display: block; }
+.field-card-front { padding: 1.5rem 1.5rem 1.625rem; display: flex; flex-direction: column; gap: 0.625rem; }
+.field-tier { align-self: flex-start; font-family: 'Instrument Sans', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.75rem; border-radius: 999px; color: var(--cream); line-height: 1; }
+.field-tier--pink   { background: var(--pink); }
+.field-tier--orange { background: var(--orange); }
+.field-tier--purple { background: var(--purple); }
+.field-tier--ink    { background: var(--ink); }
+.field-card-photo { width: 88px; height: 88px; border-radius: 50%; overflow: hidden; background: var(--ink); display: flex; align-items: center; justify-content: center; margin: 0.25rem 0 0.375rem; flex-shrink: 0; border: 1.5px solid var(--ink); }
+.field-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.field-card-photo .field-handle { font-family: 'Archivo Black', sans-serif; font-size: 0.7rem; letter-spacing: -0.01em; color: var(--cream); text-align: center; padding: 0 0.4rem; word-break: break-all; line-height: 1.1; text-transform: uppercase; }
+.field-name { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 0.98; letter-spacing: -0.025em; text-transform: uppercase; color: var(--ink); margin: 0; }
+.field-meta { font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; margin: 0; }
+.field-tagline { font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--ink); margin: 0.4rem 0 0; line-height: 1.3; }
+.field-lane { font-family: 'Instrument Sans', sans-serif; font-size: 0.9375rem; line-height: 1.5; color: var(--ink-muted); margin: 0; }
+.field-expand { margin-top: 0.5rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--pink); display: inline-flex; align-items: center; gap: 0.35rem; }
+.field-card-back { padding: 0 1.5rem 1.75rem; border-top: 1px dashed rgba(10, 10, 14, 0.15); margin-top: 0; }
+.field-card-back[hidden] { display: none; }
+.field-back-eyebrow { font-family: 'Instrument Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-faint); margin: 1.25rem 0 0.4rem; }
+.field-back-eyebrow--accent { color: var(--pink); }
+.field-back-body { font-family: 'Instrument Sans', sans-serif; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+.field-back-body--accent { color: var(--ink); font-weight: 500; }
+.field-back-list { margin: 0; padding-left: 1rem; font-family: 'Instrument Sans', sans-serif; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-soft); list-style: disc; }
+.field-back-list li::marker { color: var(--pink); }
+.field-bottom-line { background: var(--ink); color: var(--cream); border-radius: 22px; padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.75rem, 3vw, 2.75rem); max-width: 920px; margin: 0 auto; }
+.field-bottom-line-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; color: var(--cream); margin: 0 0 0.875rem; }
+.field-bottom-line-body { font-family: 'Instrument Sans', sans-serif; font-size: 1rem; line-height: 1.6; color: rgba(244, 238, 221, 0.92); margin: 0; }
+@media (max-width: 1100px) { .field-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px)  { .field-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1844,6 +1879,7 @@ footer {
         <ul class="nav-links">
             <li><a href="#audit">Audit</a></li>
             <li><a href="#strategy">Strategy</a></li>
+            <li><a href="#field">The Field</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#packages">Packages</a></li>
         </ul>
@@ -1979,7 +2015,7 @@ footer {
                 <span class="sec-eyebrow">Instagram Audit · @mandyhavliksd</span>
                 <h2 class="sec-title">Where you stand today.</h2>
             </div>
-            <p class="sec-sub">494 followers · 185 posts · 24 Reels analyzed · benchmarked against Bailey. Honest read, not a pitch.</p>
+            <p class="sec-sub">494 followers · 185 posts · last 10 posts analyzed in depth · benchmarked against Bailey. Honest read, not a pitch.</p>
         </div>
 
         <!-- KPI RADIAL RINGS -->
@@ -2000,20 +2036,20 @@ footer {
                     <span class="snap-meta delta-down"><span class="arrow"></span> 51× behind opponent</span>
                 </div>
             </div>
-            <div class="snap-card reveal reveal-delay-2" style="--p: 0.029;">
+            <div class="snap-card reveal reveal-delay-2" style="--p: 0.001;">
                 <div class="snap-ring">
                     <svg viewBox="0 0 120 120">
                         <circle class="snap-ring-track" cx="60" cy="60" r="50"></circle>
                         <circle class="snap-ring-fill" cx="60" cy="60" r="50"></circle>
                     </svg>
                     <div class="snap-ring-num">
-                        <span class="snap-ring-val">756</span>
-                        <span class="snap-ring-pct">3% of Bailey</span>
+                        <span class="snap-ring-val">0</span>
+                        <span class="snap-ring-pct">In last 10 posts</span>
                     </div>
                 </div>
                 <div class="snap-content">
-                    <span class="snap-label">Avg Reel Views</span>
-                    <span class="snap-meta delta-down"><span class="arrow"></span> 34× the reach gap</span>
+                    <span class="snap-label">Recent Reels</span>
+                    <span class="snap-meta delta-down"><span class="arrow"></span> All static. Zero Reels.</span>
                 </div>
             </div>
             <div class="snap-card reveal reveal-delay-3" style="--p: 0.66;">
@@ -2053,20 +2089,20 @@ footer {
         <!-- HEAD-TO-HEAD GAP CHART -->
         <div class="audit-bench reveal">
             <div class="bench-eyebrow">Head to head · D2 race</div>
-            <h3 class="bench-title">Avg Reel views — you vs your opponent.</h3>
+            <h3 class="bench-title">Recent Reels — you vs your opponent.</h3>
             <div class="gap-chart">
                 <div class="gap-col-wrap">
                     <div class="gap-col gap-col--mandy">
-                        <span class="gap-col-value">756</span>
+                        <span class="gap-col-value">0</span>
                     </div>
                 </div>
                 <div class="gap-center">
-                    <div class="gap-badge">34×</div>
-                    <span class="gap-badge-label">Reach gap</span>
+                    <div class="gap-badge">10:0</div>
+                    <span class="gap-badge-label">Format gap</span>
                 </div>
                 <div class="gap-col-wrap">
                     <div class="gap-col gap-col--bailey">
-                        <span class="gap-col-value">~26,000</span>
+                        <span class="gap-col-value">10 of 10</span>
                     </div>
                 </div>
             </div>
@@ -2081,14 +2117,14 @@ footer {
                     <span class="gap-tag muted">Direct opponent</span>
                 </div>
             </div>
-            <p class="bench-foot"><strong>Bailey gets 34× your reach</strong> — same template, every time. Same outfit. Same framing. The gap isn't you — it's format. We're taking his playbook and running it with your stakes.</p>
+            <p class="bench-foot"><strong>Bailey's last 10 posts are all Reels. Yours are zero.</strong> Same template every time, same outfit, same framing. He averages 1,300+ likes per Reel. The gap isn't you — it's format. We're taking his playbook and running it with your stakes.</p>
         </div>
 
-        <!-- 24-REELS HISTOGRAM -->
+        <!-- POST PERFORMANCE SCATTER -->
         <div class="audit-hist reveal">
-            <div class="hist-eyebrow">Reel performance · last 24</div>
+            <div class="hist-eyebrow">Post performance · last 24</div>
             <h3 class="hist-title">Two breakouts. The rest sat under 1K.</h3>
-            <svg class="scatter-svg" viewBox="0 0 720 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of 24 recent Reels by view count">
+            <svg class="scatter-svg" viewBox="0 0 720 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of recent posts by reach">
                 <!-- horizontal grid lines -->
                 <line class="scatter-grid" x1="50" y1="205" x2="700" y2="205"></line>
                 <line class="scatter-grid" x1="50" y1="170" x2="700" y2="170"></line>
@@ -2201,8 +2237,8 @@ footer {
                 <div class="audit-content">
                     <h3 class="audit-title">Growth Opportunity</h3>
                     <ul class="audit-body bullet-list">
-                        <li>Reels avg 756 views (median 298) — barely 1.5× follower count</li>
-                        <li>Bailey averages ~26K — same template, every video</li>
+                        <li>Last 10 posts: zero Reels — all static images and carousels</li>
+                        <li>Bailey averages 1,300+ likes per Reel — same template, every video</li>
                         <li>Fix isn't more content — it's format</li>
                         <li>Topic-label Reels + origin-story cluster + bio rebuild = share-of-voice by June 2</li>
                     </ul>
@@ -2238,7 +2274,6 @@ footer {
                     <li>"That's why I fight to ban child marriage in the U.S."</li>
                     <li>The OB Elementary crosswalk where it all started</li>
                     <li>"Mother. Wife to a disabled combat veteran. Not a politician."</li>
-                    <li>"I grew up on free school lunches."</li>
                 </ul>
             </div>
             <div class="pillar reveal reveal-delay-2">
@@ -2267,7 +2302,7 @@ footer {
                     <li>First VC, Sunset Cliffs Natural Park Council</li>
                     <li>The Chatsworth &amp; Plumosa crosswalk — you got it built</li>
                     <li>Canon Street Pocket Park</li>
-                    <li>$700K+ raised for kids with cancer</li>
+                    <li>Co-chaired Rady's Children's Hospital pancreatic cancer fundraising</li>
                     <li>OB Elementary garden coordinator</li>
                 </ul>
             </div>
@@ -2285,7 +2320,7 @@ footer {
                 <span class="sec-eyebrow">Inspiration</span>
                 <h2 class="sec-title">The playbooks we'd borrow from.</h2>
             </div>
-            <p class="sec-sub">Three accounts, three different lessons — the closest format match (Mamdani), the authenticity benchmark (AOC), and the local opponent whose template we're going to beat with your lived stakes (Bailey).</p>
+            <p class="sec-sub">Two accounts, two different lessons — the closest format match (Mamdani) and the authenticity benchmark (AOC). Your direct opponent (Bailey) is in The Field section below.</p>
         </div>
         <div class="inspo-grid">
             <div class="inspo reveal reveal-delay-1">
@@ -2318,22 +2353,272 @@ footer {
                     <span class="inspo-stat">8.5M+ followers · still posts handheld</span>
                 </div>
             </div>
-            <div class="inspo reveal reveal-delay-3">
-                <div class="inspo-visual">
-                    <span class="inspo-handle">@richardbailey__</span>
-                </div>
-                <div class="inspo-body">
-                    <h3 class="inspo-name">Richard Bailey</h3>
-                    <ul class="inspo-desc bullet-list">
-                        <li>One topic per Reel, bold sticker overlay</li>
-                        <li>Photogenic SD location</li>
-                        <li>Same outfit, same framing every video</li>
-                        <li>His template + your lived stakes = he can't win</li>
-                    </ul>
-                    <span class="inspo-stat">25.3K followers · ~26K avg Reel views</span>
-                </div>
-            </div>
         </div>
+    </div>
+</section>
+
+<!-- ================================
+     THE FIELD — opposition cards
+     ================================ -->
+<section id="field">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-head-left">
+                <span class="sec-eyebrow">The Field</span>
+                <h2 class="sec-title">Six opponents. Three real threats.</h2>
+            </div>
+            <p class="sec-sub">Six other candidates are running for District 2. Three of them can actually block your path to November. We mapped every one of them so you know exactly where the open lane is — and why it's yours.</p>
+        </div>
+
+        <div class="field-grid">
+
+            <!-- Card 01 — Bailey -->
+            <article class="field-card reveal reveal-delay-1" data-rank="1">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-1">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--pink">Path to #1</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">@richardbailey__</span>
+                        </div>
+                        <h3 class="field-name">Richard Bailey</h3>
+                        <p class="field-meta">Age 39 · Former 2-term Mayor of Coronado</p>
+                        <p class="field-tagline">The opponent.</p>
+                        <p class="field-lane">Anti-career-politician outsider with a viral video machine and a shaky residency claim.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-1" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">Plans to shrink and restructure city government. Headline ballot measure to remove trash and parking fees. Anti-Liberty Station public ownership. Did not commit to upholding ICE non-cooperation at the April 28 forum — only candidate on stage to refuse.</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">Polished outsider. Talking-head Reels with sticker overlays. Same outfit, same framing every time. Co-posts with neighborhood handles for distribution.</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>25.3K IG followers — 50× the field</li>
+                        <li>216 posts, all polished Reels with topic-label overlays</li>
+                        <li>Recent Reel average: 1,330+ likes, 125 comments</li>
+                        <li>Top recent Reel: "Beach Volleyball Is a crime?" — 2.7K likes</li>
+                        <li>Engagement rate ~5.7%</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">Almost certain to take slot #1 in the primary. Consolidates the entire non-Democrat lane while four Dems split the other half. Ceiling capped by carpetbagger problem and Republican-rebrand story.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Cadence and consistency — he ships. Hook discipline. Consistent visual identity across 200+ posts.</p>
+                    <h4 class="field-back-eyebrow">The Lane He Can't Enter</h4>
+                    <p class="field-back-body">He cannot say "I'm from here." He just moved to Point Loma to run. He has zero District 2 service record. Registered Republican until February 2026.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">Frames as Independent. Was a registered Republican until Feb 19, 2026. FPPC issued him a formal warning in April for failing to disclose stock investments over three years.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Him</h4>
+                    <p class="field-back-body field-back-body--accent">Don't out-volume his Reels. Run the lane he can't. Every Mandy Reel is "I've been doing this for ten years" with receipts. The Midway height-limit overturn that the California Supreme Court agreed with is the single video Bailey cannot make.</p>
+                </div>
+            </article>
+
+            <!-- Card 02 — Crosby -->
+            <article class="field-card reveal reveal-delay-2" data-rank="2">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-2">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--orange">Real #2 Blocker</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">@ncrosbysd</span>
+                        </div>
+                        <h3 class="field-name">Nicole Crosby</h3>
+                        <p class="field-meta">Deputy City Attorney · Clairemont Town Council Pres.</p>
+                        <p class="field-tagline">The institutional Democratic Party pick.</p>
+                        <p class="field-lane">Endorsement-stacked Dem mom-PTA candidate with the party machine behind her.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-2" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">Children's safety, gun violence prevention, hate crime prosecution, domestic violence survivor support. Pro-Liberty Station public ownership. Pro-ICE non-cooperation. Climate resilience.</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">PTA-mom-advocate persona. Family photos, daughter in many posts, Earth Day cleanups, MADD walks. Heavy on endorsement graphics and event speaking shots. Two accounts split her audience — personal (738) reposts campaign account (523).</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>~1,260 followers across two accounts (with overlap)</li>
+                        <li>13+ Story Highlights organized by lifestyle pillar</li>
+                        <li>Only 1 Reel in recent posts — underperformed (68 likes vs. 100 on her endorsement graphic)</li>
+                        <li>Average post engagement: 50–100 likes</li>
+                        <li>~$35K raised by Feb 2026</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">Real path through institutional Dem turnout. Has SD County Democratic Party + firefighters union + Supervisor Montgomery Steppe + Supervisor Paloma Aguirre + Councilmember Kevin Shin endorsements.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Endorsement collection — strongest institutional support in the field. Authentic family/community lifestyle posting. Clear PTA-mom brand consistency.</p>
+                    <h4 class="field-back-eyebrow">The Lane She Can't Enter</h4>
+                    <p class="field-back-body">She can't say "I'm not the establishment Dem." She is. She can't say "I have a content engine." Her static endorsement graphics outperform her Reels. She's based in Clairemont — the inland edge of D2, not the beach communities where most D2 voters live.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">Frames as grassroots community advocate while being the party-endorsed candidate. The two-account split confuses her audience. Her track record is institutional — prosecutor, town council president — not fight-City-Hall like Mandy's.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Her</h4>
+                    <p class="field-back-body field-back-body--accent">Crosby's lane is endorsements. Mandy's lane is receipts. The win against Crosby isn't about content volume — it's about owning the "I've actually won fights with City Hall" story. Crosby has never overturned a ballot measure. Mandy has.</p>
+                </div>
+            </article>
+
+            <!-- Card 03 — Coyne -->
+            <article class="field-card reveal reveal-delay-3" data-rank="3">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-3">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--orange">Real #2 Blocker</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">@electjoshcoyne</span>
+                        </div>
+                        <h3 class="field-name">Josh Coyne</h3>
+                        <p class="field-meta">Chief of Staff · Downtown SD Partnership</p>
+                        <p class="field-tagline">Money lead. Insider continuity.</p>
+                        <p class="field-lane">Establishment continuity candidate funded for door-knocking, not content.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-3" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">Solving street homelessness, improving city services, economic opportunity. Pro-housing growth. SD Pride Board Member. Standard establishment-progressive platform.</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">Door-knocking, volunteer photo-ops, endorsement graphics. Heavy on canvassing imagery. Uses "Neighbor • Leader • Advocate" in his bio — directly contesting Mandy's "your neighbor" framing.</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>346 followers on campaign IG, 42 posts</li>
+                        <li>Bio borrows Mandy's "Neighbor" framing word-for-word</li>
+                        <li>2 recent Reels — both weak (one is just a logo, one is a still image with audio)</li>
+                        <li>Average post engagement: 50–100 likes</li>
+                        <li>Top fundraiser at ~$93K (includes $30K self-loan)</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">Money + endorsements + door-knocking volume. Worked in Council President Jennifer Campbell's D2 office, so he has the "continuity" pitch for voters who liked Campbell. Endorsements: Congressman Scott Peters, UNA Local 89.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Volunteer mobilization. Big team in his canvassing photos. Endorsement breadth (Congress + unions + Pride). Money for mailers and ads.</p>
+                    <h4 class="field-back-eyebrow">The Lane He Can't Enter</h4>
+                    <p class="field-back-body">He can't say "I'm an outsider." He literally worked in the office of the person leaving the seat. He can't say "I have a content engine." His Reels barely exist and don't perform.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">Pitches as "Neighbor • Leader • Advocate." Real title is Chief of Staff at a downtown lobbying-adjacent org. The continuity story is the actual story; the neighbor framing is borrowed.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Him</h4>
+                    <p class="field-back-body field-back-body--accent">Coyne's $93K can't buy a content engine in 5 weeks. Mandy's $2,900 can build one. Out-execute him on content while he runs the door game.</p>
+                </div>
+            </article>
+
+            <!-- Card 04 — Mitchell -->
+            <article class="field-card reveal reveal-delay-4" data-rank="4">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-4">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--purple">Spoiler</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">jacobmitchell2026.com</span>
+                        </div>
+                        <h3 class="field-name">Jacob Mitchell</h3>
+                        <p class="field-meta">Age 28 · Chemist (Abbott labs, MBA in progress)</p>
+                        <p class="field-tagline">Crowd favorite at the April 28 forum.</p>
+                        <p class="field-lane">The honest naïve outsider who steals the "I'm sick of politicians" young vote.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-4" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">Housing affordability — cut permitting timelines, pre-approved duplex/triplex designs, crack down on STR abuse. Long-term infrastructure planning. Tagline: "San Diego should be a home, not an investment strategy."</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">Website-only campaign. No active IG, no social presence. Fourth-generation San Diegan. Showed up at the April 28 forum and reportedly became the crowd favorite for his honesty and naïveté.</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>Website only — text-heavy, minimal design</li>
+                        <li>No active Instagram surfaced</li>
+                        <li>No Facebook or other social presence</li>
+                        <li>Effectively running a 1990s-style web-and-word-of-mouth campaign</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">Unlikely to make slot #2 directly. Real impact is as a spoiler — could peel off the "I'm sick of politicians" young-voter share that Mandy or Bailey would otherwise consolidate.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Authentic in-person presence — forum charisma is real. Housing-policy specificity sharper than most. Fourth-generation native frame is the strongest anti-carpetbagger positioning in the race.</p>
+                    <h4 class="field-back-eyebrow">The Lane He Can't Enter</h4>
+                    <p class="field-back-body">He cannot reach voters who aren't at forums. Without social, he has no scaled distribution. He's 28 with no track record, no endorsements, no money.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">None worth pursuing. Mitchell is not a top-2 threat for slot #2.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Him</h4>
+                    <p class="field-back-body field-back-body--accent">She doesn't need to. He's running a different race. Watch-out: if Mandy's content sounds too political-veteran, Mitchell's authenticity could peel off some young voters. Solution: Mandy's origin story has the same authenticity, with the receipts to back it up.</p>
+                </div>
+            </article>
+
+            <!-- Card 05 — Suppa -->
+            <article class="field-card reveal reveal-delay-5" data-rank="5">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-5">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--purple">Spoiler</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">sddistrict2.com</span>
+                        </div>
+                        <h3 class="field-name">Paul Suppa</h3>
+                        <p class="field-meta">Attorney · Partner at Estelle &amp; Kennedy</p>
+                        <p class="field-tagline">"Better Call Paul." Fiscal-rage Independent.</p>
+                        <p class="field-lane">Anti-status-quo independent who fragments Bailey's non-Dem coalition.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-5" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">S.A.F.E. acronym — Streets &amp; Safety, Affordability &amp; Accountability, Financial Responsibility, Environment &amp; Education. Anti-current-leadership. Anti-SB-79 state housing density law. Anti-tax-and-fee-increases.</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">Aggressive, populist, attorney-as-citizen-advocate. Slogan: "San Diego: We cannot afford the current leadership. SAY NO TO THE STATUS QUO!" Tone is explicitly angry. Phone-as-CTA: "Better Call Paul at 619.930.6309."</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>Squarespace site — basic</li>
+                        <li>No Instagram, no real social presence</li>
+                        <li>Functions as a second non-Democrat on the ballot alongside Bailey</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">Vanishingly small. Real role is as a vote-splitter who eats into Bailey's non-Dem coalition. Every vote Suppa pulls from Bailey is one Bailey doesn't have at the top.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Memorable slogan ("Better Call Paul"). Clear fiscal platform. Authentic anger — voters who are pissed at the city respond to that.</p>
+                    <h4 class="field-back-eyebrow">The Lane He Can't Enter</h4>
+                    <p class="field-back-body">He cannot scale his message past people who already know him. No social, no content, no endorsements.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">None worth pursuing. Suppa helps Mandy by hurting Bailey. Don't pick a fight with someone who's making your hardest opponent's math worse.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Him</h4>
+                    <p class="field-back-body field-back-body--accent">She doesn't fight him. She lets him do his job (split Bailey's vote) and focuses on Crosby and Coyne for the slot #2 fight.</p>
+                </div>
+            </article>
+
+            <!-- Card 06 — Rickey -->
+            <article class="field-card reveal reveal-delay-6" data-rank="6">
+                <button class="field-card-btn" type="button" aria-expanded="false" aria-controls="field-detail-6">
+                    <div class="field-card-front">
+                        <span class="field-tier field-tier--ink">Protest Vote</span>
+                        <div class="field-card-photo">
+                            <span class="field-handle">mikerickey.com</span>
+                        </div>
+                        <h3 class="field-name">Mike Rickey</h3>
+                        <p class="field-meta">Merchant Marine · SD Native (Clairemont)</p>
+                        <p class="field-tagline">Libertarian protest vote.</p>
+                        <p class="field-lane">The "stop changing my neighborhood" anti-bike-lane libertarian.</p>
+                        <span class="field-expand">Tap for the deep dive →</span>
+                    </div>
+                </button>
+                <div class="field-card-back" id="field-detail-6" hidden>
+                    <h4 class="field-back-eyebrow">Policies</h4>
+                    <p class="field-back-body">Anti-bike-lanes (most vocal critic at forums). Anti-ADU-incentive. Anti-empty-homes-tax. Anti-change. 20+ years sailing as a Merchant Marine.</p>
+                    <h4 class="field-back-eyebrow">Approach</h4>
+                    <p class="field-back-body">"It's Time To Save Our SAN DIEGO. Join our movement now." Bare-bones website. No content. Wasn't on stage at the April 28 forum at Liberty Station — six of seven candidates attended, he was the absent one.</p>
+                    <h4 class="field-back-eyebrow">Online Presence</h4>
+                    <ul class="field-back-list">
+                        <li>Website — placeholder hero, "Get in Touch" CTA, minimal</li>
+                        <li>Facebook page exists but minimal activity</li>
+                        <li>Doesn't appear on the city's Campaign Disclosure Reports — under the reporting threshold</li>
+                    </ul>
+                    <h4 class="field-back-eyebrow">Path to Win</h4>
+                    <p class="field-back-body">None. He's the protest-vote candidate that takes 1–3% from voters who want to register dissatisfaction without supporting any of the credible options.</p>
+                    <h4 class="field-back-eyebrow">Doing Well</h4>
+                    <p class="field-back-body">Clear ideological brand (Libertarian) distinct from everyone else. Captures voters who are anti-density / anti-bike-lane / anti-change.</p>
+                    <h4 class="field-back-eyebrow">The Lane He Can't Enter</h4>
+                    <p class="field-back-body">He can't win. He can't grow. He can't build a coalition.</p>
+                    <h4 class="field-back-eyebrow">Narrative Gap</h4>
+                    <p class="field-back-body">None worth pursuing.</p>
+                    <h4 class="field-back-eyebrow field-back-eyebrow--accent">How Mandy Beats Him</h4>
+                    <p class="field-back-body field-back-body--accent">Same answer as Mitchell and Suppa. Don't engage. Focus on the slot #2 fight.</p>
+                </div>
+            </article>
+
+        </div>
+
+        <aside class="field-bottom-line reveal">
+            <h3 class="field-bottom-line-title">The bottom line.</h3>
+            <p class="field-bottom-line-body">Six opponents. Three real threats. Bailey takes slot #1 with high probability. Crosby and Coyne are the actual fight for slot #2. Every one of them has a content gap. Bailey has volume but no personal story. Crosby has endorsements but no Reels. Coyne has money but no content engine. Mandy is the only candidate in the field with a 10-year community résumé AND the lived narrative AND the format runway. The 15-video package is exactly enough to monopolize the lane that none of them can enter.</p>
+        </aside>
     </div>
 </section>
 
@@ -2640,6 +2925,26 @@ if (supportsHover && !reducedMotion) {
     const c = document.getElementById('cursor'); if (c) c.remove();
     const r = document.getElementById('cursor-ring'); if (r) r.remove();
 }
+
+// THE FIELD — expand/collapse cards
+document.querySelectorAll('.field-card-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const card = btn.closest('.field-card');
+        const back = card.querySelector('.field-card-back');
+        const expand = card.querySelector('.field-expand');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        if (isOpen) {
+            back.setAttribute('hidden', '');
+            card.classList.remove('is-open');
+            expand.textContent = 'Tap for the deep dive →';
+        } else {
+            back.removeAttribute('hidden');
+            card.classList.add('is-open');
+            expand.textContent = 'Close ↑';
+        }
+    });
+});
 </script>
 
 </body>
