@@ -949,6 +949,10 @@ section { padding: var(--sec-y) 0; position: relative; }
 /* Sec-head right column — wraps subtitle + optional small logo */
 .sec-head-right { display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
 .sec-head-logo { max-width: 260px; width: 100%; height: auto; display: block; opacity: 0.92; }
+/* When the right column has the logo, align the whole sec-head to the top so the logo lines up with the title */
+#goals .sec-head { align-items: start; }
+/* Offset the right column to match the eyebrow + gap height so the logo top aligns with the title top */
+#goals .sec-head-right { padding-top: calc(0.875rem + 1.25rem); }
 @media (max-width: 1100px) { .sec-head-logo { max-width: 220px; margin-top: 0.25rem; } }
 
 /* AUDIT SUMMARY — block header */
@@ -2018,8 +2022,8 @@ footer {
                 <h2 class="sec-title">Where you are. Where we're headed.</h2>
             </div>
             <div class="sec-head-right">
-                <p class="sec-sub">Who you are. Who you're reaching. What winning looks like.</p>
                 <img class="sec-head-logo" src="images/mandy-logo.png" alt="Mandy Havlik for City Council District 2" loading="lazy">
+                <p class="sec-sub">Who you are. Who you're reaching. What winning looks like.</p>
             </div>
         </div>
         <div class="goals-grid">
